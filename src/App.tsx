@@ -1,13 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import './App.css';
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: import.meta.env.VITE_REACT_APP_API_KEY
+  });
 
   return (
     <div className="App">
-      hello, world!
+      {isLoaded
+      ? <GoogleMap
+        mapContainerStyle={{width: "1000px", height: "500px"}}
+        center={{lat: -27.13329616701353, lng: -109.42732706665997}}
+        zoom={20}
+      ></GoogleMap>
+      : <> not loaded</>}
+
     </div>
   )
 }
