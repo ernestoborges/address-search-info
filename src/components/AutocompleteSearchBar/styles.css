@@ -1,10 +1,17 @@
 .search-section {
+    width: 30rem;
     display-flex;
     flex-direction: column;
 }
+.search-section > label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 
 .autocomplete-input {
-
+    width: 100%;
+    padding: 1rem;
 }
 
 .autocomplete-list {

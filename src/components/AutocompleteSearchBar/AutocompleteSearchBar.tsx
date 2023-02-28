@@ -5,7 +5,9 @@ import PlaceContext from "../../contexts/PlaceProvider";
 
 export function AutocompleteSearchBar() {
 
+  const place = useContext(PlaceContext)?.place;
   const setPlace = useContext(PlaceContext)?.setPlace;
+  const map = useContext(PlaceContext)?.map;
 
   const {
     ready,
