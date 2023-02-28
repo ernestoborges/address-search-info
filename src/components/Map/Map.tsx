@@ -22,6 +22,12 @@ export function Map() {
                 mapContainerStyle={{ width: "500px", height: "500px" }}
                 center={center}
                 zoom={15}
+                options={{
+                    zoomControl: false,
+                    streetViewControl: false,
+                    mapTypeControl: false,
+                    fullscreenControl: false
+                }}
                 onLoad = {(map) => {if(setMap)setMap(map)}}
             >
                 {place && <Marker position={place} />}

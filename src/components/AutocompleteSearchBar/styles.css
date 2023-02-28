@@ -1,6 +1,6 @@
 .search-section {
     width: 30rem;
-    display-flex;
+    display: flex;
     flex-direction: column;
 }
 .search-section > label {
@@ -12,12 +12,62 @@
 .autocomplete-input {
     width: 100%;
     padding: 1rem;
+    color: var(--main-text-color);
+    background-color: var(--element-background);
+    border: none;
+    border-radius: 0.4rem;
 }
 
 .autocomplete-list {
     width: 100%;
-    display: flex;
+    padding: 1rem 0;
+    white-space: nowrap;
+
+    position: relative;
+
+    display: none;
     flex-direction: column;
     align-items: flex-start;
+    /* overflow: hidden; */
+
+    color: var(--main-text-color);
+    background-color: var(--element-background);
+    border-top: none;
+    border-radius: 0 0 0.4rem 0.4rem;
+    border-top: 0.1rem solid var(--main-text-color);
+}
+
+.autocomplete-list > .blur-border {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1rem;
+    background-color: var(--element-background);
+}
+
+.autocomplete-list > li {
+    width: 100%;
+    display: flex;
+    justfy-content: flex-start;
+    align-items: center;
+    gap: 0.4rem;
+}
+.autocomplete-list > li:hover {
+    background-color:  var(--element-background-selection)
+}
+
+.autocomplete-list > li > span {
+    width: 100%;
+    width: 100%;
+    display: flex;
+    justfy-content: flex-start;
     overflow: hidden;
+}
+
+.autocomplete-input,
+.autocomplete-list > li {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    cursor: pointer;
 }
