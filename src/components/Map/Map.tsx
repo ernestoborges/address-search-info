@@ -19,7 +19,7 @@ export function Map() {
     return (
         <>
             <GoogleMap
-                mapContainerStyle={{ width: "500px", height: "500px" }}
+                mapContainerStyle={{ width: "350px", height: "250px" }}
                 center={center}
                 zoom={15}
                 options={{

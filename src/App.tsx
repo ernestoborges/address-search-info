@@ -18,10 +18,10 @@ function App() {
     <div className="App">
       {isLoaded &&
         <div className="map-search-container">
-          <section className="search-section">
-            <AutocompleteSearchBar />
-          </section>
           <section className="map-section">
+            <div className="search-container">
+              <AutocompleteSearchBar />
+            </div>
             <Map />
           </section>
           <section className="weather-info-section">
@@ -29,7 +29,6 @@ function App() {
           </section>
         </div>
       }
-      
     </div>
   )
 }

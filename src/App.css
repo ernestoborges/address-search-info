@@ -9,3 +9,18 @@
   display: flex;
   gap: 2rem;
 }
+
+.map-section {
+  position: relative;
+  border-radius: 0.4rem;
+  overflow: hidden;
+}
+
+.search-container {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
+  z-index: 1
+}
