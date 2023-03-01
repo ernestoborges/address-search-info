@@ -81,7 +81,6 @@ export function SunMoonClock() {
         const width = 100;
         const height = 100;
         const xC = width / 2, yC = height / 2;
-        // const r = (width + 10) / 2;
         const radius = ((i * 360 / dots) - 90) * Math.PI / 180;
 
         const x = xC + (r * Math.sin(-radius))
@@ -120,6 +119,10 @@ export function SunMoonClock() {
                         <span style={clockDotsPosition(1, 4, 68)} >6</span>
                         <span style={clockDotsPosition(2, 4, 68)} >12</span>
                         <span style={clockDotsPosition(3, 4, 68)} >18</span>
+                    </div>
+                    <div className="clock-pointer">
+                        <span style={clockDotsPosition(sunPosDegree.currentHourDegree + 180, 360, 45)}></span>
+                        <span style={clockDotsPosition(sunPosDegree.currentHourDegree + 180, 360, 30)}></span>
                     </div>
                 </div>
             </div>

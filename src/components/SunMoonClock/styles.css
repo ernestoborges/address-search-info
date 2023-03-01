@@ -36,7 +36,7 @@
 
 
   .sun-moon-wrapper {
-    border: 0.1rem solid red;
+    /* border: 0.1rem solid red; */
     padding: 3rem;
   }
 
@@ -106,3 +106,18 @@
     transform: translate(-50%, -50%);
     font-size: 1rem;
   }
+
+
+
+  /* clock pointer */
+
+  .clock-pointer > span {
+    width: 0.5rem;
+    height: 0.5rem;
+    transform: translate(-50%, -50%);
+    background-color: var(--background);
+    border-radius: 50%;
+    position: absolute;
+    /* border: 0.1rem solid white */
+
+}
