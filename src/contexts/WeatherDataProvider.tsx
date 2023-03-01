@@ -44,9 +44,36 @@ interface WeatherApiResponse {
     }
 }
 
+interface AstroApiResponse {
+    location: {
+        name: string;
+        region: string;
+        country: string;
+        lat: number;
+        lon: number;
+        tz_id: string;
+        localtime_epoch: string;
+        localtime: string;
+    };
+    astronomy: {
+        astro: {
+            sunrise: string
+            sunset: string
+            moonrise: string
+            moonset: string
+            moon_phase: string
+            moon_illumination: string
+            is_moon_up: number
+            is_sun_up: number
+        }
+    }
+}
+
 interface ValuesProps {
     weatherData: WeatherApiResponse | null
     setWeatherData: React.Dispatch<React.SetStateAction<WeatherApiResponse>> | React.Dispatch<React.SetStateAction<null>>
+    astroData: AstroApiResponse | null ;
+    setAstroData: React.Dispatch<React.SetStateAction<AstroApiResponse>> | React.Dispatch<React.SetStateAction<null>>;
 }
 
 const WeatherDataContext = createContext<ValuesProps | null>(null);
@@ -54,9 +81,10 @@ const WeatherDataContext = createContext<ValuesProps | null>(null);
 export function WeatherDataProvider({ children }: Props) {
 
     const [weatherData, setWeatherData] = useState(null);
+    const [astroData, setAstroData] = useState(null);
 
     return (
-        <WeatherDataContext.Provider value={{weatherData, setWeatherData}}>
+        <WeatherDataContext.Provider value={{weatherData, setWeatherData, astroData, setAstroData}}>
             {children}
         </WeatherDataContext.Provider>
     )
