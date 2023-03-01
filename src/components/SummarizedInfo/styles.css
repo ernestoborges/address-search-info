@@ -1,0 +1,98 @@
+.summarized-info-section {
+    position: relative;
+    width: 20rem;
+    height: 20rem;
+    border-radius: 0.4rem;
+    overflow: hidden;
+  }
+  
+  .summarized-info-section img {
+    /* filter: blur(px); */
+    width: 100%;
+    height: 100%;
+  }
+  
+  .summarized-info-section > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20%;
+  }
+  
+  .summarized-info-section > div > .place-name {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justfy-content: center;
+    background-color: rgba(255, 255, 255, .15);  
+    backdrop-filter: blur(5px);
+    padding: 0.2rem 1rem;
+  }
+  
+  .summarized-info-section > div > .place-name > span{
+    text-transform: capitalize;
+    font-size: 1.2rem;
+  }
+  
+  .summarized-info {
+    width: 55%;
+    height: 55%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    overflow:hidden;
+    padding: 0 1rem;
+    background-color: rgba(255, 255, 255, .15);  
+    backdrop-filter: blur(5px);
+  }
+  
+  .summarized-info .minus-sign {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    transform: translateX(-100%);
+    font-size: 4rem;
+  }
+  .summarized-info .value {
+    font-size: 4rem;
+    position: relative;
+  }
+  .summarized-info .unit {
+    position: absolute;
+    top: 25%;
+    right: 0;
+    font-size: 1.4rem;
+    transform: translateX(100%);
+  }
+  
+  .summarized-info .weather {
+    font-size: 1.2rem;
+    text-transform: capitalize;
+  }
+  
+  .summarized-info .max-min-container{
+    font-size: 1.2rem;
+    display: flex;
+    gap: 0.4rem;
+  }
+  
+  .condition-name{
+    width: 100%;
+    background-color: rgba(255, 255, 255, .15);  
+    backdrop-filter: blur(5px);
+    padding: 0.2rem 0.4rem;
+    font-size: 1rem;
+  }

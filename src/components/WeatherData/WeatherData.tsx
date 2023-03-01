@@ -1,51 +1,15 @@
 import "./styles.css"
 import { useContext, useEffect, useState } from "react";
 import PlaceContext from "../../contexts/PlaceProvider";
-
-interface WeatherApiResponse {
-    location: {
-        name: string;
-        region: string;
-        country: string;
-        lat: number;
-        lon: number;
-        tz_id: string;
-        localtime_epoch: string;
-        localtime: string;
-    };
-    current: {
-        last_updated_epoch: number;
-        last_updated: string;
-        temp_c: number;
-        temp_f: number;
-        is_day: number;
-        condition: {
-            text: string;
-            icon: string;
-            code: number;
-        }
-        wind_mph: number;
-        wind_kph: number;
-        wind_degree: number;
-        wind_dir: string;
-        pressure_mb: number;
-        pressure_in: number;
-        humidity: number;
-        cloud: number;
-        feelslike_c: number;
-        feelslike_f: number;
-        vis_km: number;
-        vis_miles: number;
-        uv: number;
-        gust_mph: number;
-        gust_kph: number;
-    }
-}
+import WeatherDataContext from "../../contexts/WeatherDataProvider";
 
 export function WeatherData() {
-    const [weatherData, setWeatherData] = useState<WeatherApiResponse>();
+    // const [weatherData, setWeatherData] = useState<WeatherApiResponse>();
 
     const place = useContext(PlaceContext)?.place;
+
+    const weatherData = useContext(WeatherDataContext)?.weatherData;
+    const setWeatherData = useContext(WeatherDataContext)?.setWeatherData;
 
     const weatherHTTP = `http://api.weatherapi.com/v1/current.json?key=${import.meta.env.VITE_REACT_APP_WEATHERAPI_API_KEY}&q=${place?.lat},${place?.lng}`
 
@@ -53,7 +17,7 @@ export function WeatherData() {
         try {
             const response = await fetch(weatherHTTP);
             const data = await response.json();
-            setWeatherData(data);
+            if(setWeatherData) setWeatherData(data);
         } catch (error) {
             console.error(error);
         }
@@ -87,6 +51,7 @@ export function WeatherData() {
                     <p>Pressure: {weatherData?.current.pressure_mb} Millibar</p>
                     <p>Humidity: {weatherData?.current.humidity}</p>
                     <p>UV: {weatherData?.current.uv}</p>
+                    <p>Desc: {weatherData?.current.condition.text}</p>
                 </section>
             </article>
         </>

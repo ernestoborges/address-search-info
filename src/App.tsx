@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import './App.css';
 import { AutocompleteSearchBar } from './components/AutocompleteSearchBar/AutocompleteSearchBar';
 import { Map } from './components/Map/Map';
+import { SummarizedInfo } from './components/SummarizedInfo/SummarizedInfo';
 import { WeatherData } from './components/WeatherData/WeatherData';
 
 const libraries: ["places" | "drawing" | "geometry" | "localContext" | "visualization"] = ['places'];
@@ -24,6 +25,7 @@ function App() {
             </div>
             <Map />
           </section>
+          <SummarizedInfo />
           <section className="weather-info-section">
             <WeatherData />
           </section>
