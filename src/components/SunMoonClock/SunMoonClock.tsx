@@ -2,6 +2,17 @@ import "./styles.css"
 import { useContext, useEffect, useState } from "react";
 import WeatherDataContext from "../../contexts/WeatherDataProvider";
 import { IoIosMoon, IoIosSunny } from "react-icons/io"
+import {
+    WiMoonAltNew,
+    WiMoonAltFull,
+    WiMoonAltWaxingCrescent3,
+    WiMoonAltWaxingGibbous3,
+    WiMoonAltFirstQuarter,
+    WiMoonAltWaningGibbous3,
+    WiMoonAltThirdQuarter,
+    WiMoonAltWaningCrescent3,   
+    // WiMoonAltWaxing6
+} from "react-icons/wi"
 
 export function SunMoonClock() {
 
@@ -66,16 +77,26 @@ export function SunMoonClock() {
         )
     }
 
-    useEffect(() => {
-        if (astroData)
-            astroPosDegree(
-                astroData.astronomy.astro.sunrise,
-                astroData.astronomy.astro.sunset,
-                astroData.astronomy.astro.moonrise,
-                astroData.astronomy.astro.moonset,
-                astroData.location.localtime
-            )
-    }, [astroData]);
+    function moonPhasePicker(moon: string) {
+        switch (moon) {
+            case "Full Moon":
+                return <WiMoonAltFull />
+            case "Waning Gibbous":
+                return <WiMoonAltWaningGibbous3 />
+            case "Last Quarter":
+                return <WiMoonAltThirdQuarter />
+            case "Waning Crescent":
+                return <WiMoonAltWaningCrescent3 />
+            case "New Moon":
+                return <WiMoonAltNew />
+            case "Waxing Crescent":
+                return <WiMoonAltWaxingCrescent3 />
+            case "First Quarter":
+                return <WiMoonAltFirstQuarter />
+            case "Waxing Gibbous":
+                return <WiMoonAltWaxingGibbous3 />
+        }
+    }
 
     function clockDotsPosition(i: number, dots: number, r: number) {
         const width = 100;
@@ -88,6 +109,17 @@ export function SunMoonClock() {
 
         return ({ top: x + "px", left: y + "px" });
     }
+
+    useEffect(() => {
+        if (astroData)
+            astroPosDegree(
+                astroData.astronomy.astro.sunrise,
+                astroData.astronomy.astro.sunset,
+                astroData.astronomy.astro.moonrise,
+                astroData.astronomy.astro.moonset,
+                astroData.location.localtime
+            )
+    }, [astroData]);
 
     return (
         <>
@@ -122,15 +154,15 @@ export function SunMoonClock() {
                     </div>
                     <div className="clock-display">
                         <div>
-                            <span>
-                                {
-                                    astroData && astroData?.location.localtime.split(" ")[1].split(":")[0].length > 1
-                                        ? astroData?.location.localtime.split(" ")[1].split(":")[0]
-                                        : "0" + astroData?.location.localtime.split(" ")[1].split(":")[0]
-                                }
-                            </span>
-                            <span>:</span>
-                            <span>{astroData?.location.localtime.split(" ")[1].split(":")[1]}</span>
+                            <div className="moon-phase-container">
+                                <div className="moon-icon-container">
+                                    <img src="images/weather/moon-small.png"></img>
+                                    <div></div>
+                                    {
+                                        astroData && moonPhasePicker(astroData?.astronomy.astro.moon_phase)
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="clock-sunmoon-icons">
@@ -149,7 +181,6 @@ export function SunMoonClock() {
                         <span style={clockDotsPosition(sunPosDegree.currentHourDegree + 180, 360, 31)}></span>
                     </div>
                 </div>
-                <br/><br/><br/>
             </div>
         </>
     )
