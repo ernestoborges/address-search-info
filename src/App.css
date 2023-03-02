@@ -26,40 +26,4 @@
   z-index: 1
 }
 
-.moon-icon-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
 
-.moon-icon-container > img {
-  width: 5rem;
-  height: 5rem;
-  /* transform: translate(-50%,-50%);
-  position: absolute;
-  top: 50%;
-  left: 50%; */
-}
-.moon-icon-container > div{
-  width:  5rem;
-  height: 5rem;
-  border-radius: 50%;
-  box-sizing: content-box;
-  border: 0.4rem solid red;
-  border: 0.4rem solid var(--element-background);
-  transform: translate(-51%,-50%);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 1;
-}
-.moon-icon-container > svg {
-  width:  7.5rem;
-  height: 7.5rem;
-  transform: translate(-51%,-48%);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  color: black;
-  opacity: 0.8;
-}
