@@ -20,7 +20,7 @@ export function SunMoonClock() {
 
     function hour24Format(date: string) {
         if (date.split(" ")[1] === "PM") {
-            return (`${(Number(date.split(":")[0]) + 12).toString()}:${date.split(" ")[0].split(":")[1]}`)
+            return (`${(Number(date.split(":")[0]) === 12 ? 12 : Number(date.split(":")[0]) + 12).toString()}:${date.split(" ")[0].split(":")[1]}`)
         }
         return (Number(date.split(":")[0]) >= 12 ? (Number(date.split(":")[0]) - 12).toString() + ":" + date.split(" ")[0].split(":")[1] : date.split(" ")[0])
 
@@ -147,9 +147,12 @@ export function SunMoonClock() {
                     </div>
                     <div className="clock-pointer">
                         <span style={clockDotsPosition(sunPosDegree.currentHourDegree + 180, 360, 45)}></span>
-                        <span style={clockDotsPosition(sunPosDegree.currentHourDegree + 180, 360, 30)}></span>
+                        <span style={clockDotsPosition(sunPosDegree.currentHourDegree + 180, 360, 31)}></span>
                     </div>
                 </div>
+                <br/><br/><br/>
+                <span>{moonPosDegree.startDegree}</span><br/>
+                <span>{moonPosDegree.endDegree}</span>
             </div>
         </>
     )
