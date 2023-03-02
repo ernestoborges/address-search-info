@@ -1,6 +1,7 @@
 import "./styles.css"
 import { useContext, useEffect, useState } from "react";
 import WeatherDataContext from "../../contexts/WeatherDataProvider";
+import { IoIosMoon, IoIosSunny } from "react-icons/io"
 
 export function SunMoonClock() {
 
@@ -120,18 +121,36 @@ export function SunMoonClock() {
                         <span style={clockDotsPosition(2, 4, 68)} >12</span>
                         <span style={clockDotsPosition(3, 4, 68)} >18</span>
                     </div>
+                    <div className="clock-display">
+                        <div>
+                            <span>
+                                {
+                                    astroData && astroData?.location.localtime.split(" ")[1].split(":")[0].length > 1
+                                        ? astroData?.location.localtime.split(" ")[1].split(":")[0]
+                                        : "0" + astroData?.location.localtime.split(" ")[1].split(":")[0]
+                                }
+                            </span>
+                            <span>:</span>
+                            <span>{astroData?.location.localtime.split(" ")[1].split(":")[1]}</span>
+                        </div>
+                    </div>
+                    <div className="clock-sunmoon-icons">
+                        <IoIosSunny style={clockDotsPosition(
+                            (sunPosDegree.startDegree + sunPosDegree.endDegree) / 2,
+                            360,
+                            45
+                        )} />
+                        <IoIosMoon style={clockDotsPosition(
+                            (moonPosDegree.startDegree + moonPosDegree.endDegree) / 2 + 180,
+                            360,
+                            30.5)} />
+                    </div>
                     <div className="clock-pointer">
                         <span style={clockDotsPosition(sunPosDegree.currentHourDegree + 180, 360, 45)}></span>
                         <span style={clockDotsPosition(sunPosDegree.currentHourDegree + 180, 360, 30)}></span>
                     </div>
                 </div>
             </div>
-            {/* 
-        {sunPosDegree.startDegree}<br />
-        {sunPosDegree.endDegree}<br />
-        {moonPosDegree.startDegree}<br />
-        {moonPosDegree.endDegree}<br />
-        {Math.abs(moonPosDegree.endDegree - moonPosDegree.startDegree) * 100 / 360} */}
         </>
     )
 }

@@ -1,123 +1,125 @@
-.sun-position-section > div {
-    border: 0.1rem solid green;
-  }
-  
-  .sun-position-section > div {
-    border: 0.1rem solid red;
-    width: 10rem;
-    height: 10rem;
-    padding: 0.4rem;
-    position: relative
-  }
-  
-  .sun-position-section > div > div {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  
-  
-  .sun-position-section > div > div > div {
-    border: 0.1rem solid red;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    position: relative
-  }
-  
-  .sun-position-section > div > div > div > svg {
-    position: absolute;
-    top: 0;
-    right: 50%;
-    transform: translate(50%, -50%);
-  }
-
-
-  .sun-moon-wrapper {
-    /* border: 0.1rem solid red; */
-    padding: 3rem;
-  }
-
-  .sun-moon-container {
-    position: relative;
-    width: 10rem;
-    height: 10rem;
-  }
-
-  .sun-clock {
-    width: 10rem;
-    height: 10rem;
+.sun-clock-section {
+    background-color: var(--element-background);
+    display: flex;
+    align-items: center;
+    border-radius: 1.2rem;
     padding: 1rem;
-    border-radius: 50%;
-    background-image: conic-gradient(from 22deg at 50% 50%, #FBEF00 25%, #FBEF00 25%);
-    transition: background-image 1s
-  
-  }
-  
-  .sun-clock > div {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    padding: 0.4rem;
-    background-color: var(--background);
-  }
-  
-  .moon-clock {
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-    border-radius: 50%;
-    background-image: conic-gradient(from 22deg at 50% 50%, #00FFFFFF 25%, #073AFFFF 25%);
-  }
-  
-  .moon-clock > div {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-color: var(--background);
-  }
+}
 
-  .clock-border {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
+.sun-moon-wrapper {
+   padding: 3rem;
+}
 
-  .clock-hour-point {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    width: 0.2rem;
-    height: 0.2rem;
-    background-color: white;
-    border-radius: 50%;
-  }
+.sun-moon-container {
+   position: relative;
+   width: 10rem;
+   height: 10rem;
+}
 
-  .clock-hour-point:nth-child(6n + 1) {
-    width: 0.4rem;
-    height: 0.4rem;
-  }
+.sun-clock {
+   width: 10rem;
+   height: 10rem;
+   padding: 1rem;
+   border-radius: 50%;
+   background-image: conic-gradient(from 22deg at 50% 50%, #FBEF00 25%, #FBEF00 25%);
+   transition: background-image 1s
+}
 
-  .clock-border-title > span {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    font-size: 1rem;
-  }
+.sun-clock > div {
+   width: 100%;
+   height: 100%;
+   border-radius: 50%;
+   padding: 0.4rem;
+   background-color: var(--background);
+}
+ 
+.moon-clock {
+   width: 100%;
+   height: 100%;
+   padding: 1rem;
+   border-radius: 50%;
+   background-image: conic-gradient(from 22deg at 50% 50%, #00FFFFFF 25%, #073AFFFF 25%);
+}
+ 
+.moon-clock > div {
+   width: 100%;
+   height: 100%;
+   border-radius: 50%;
+   background-color: var(--background);
+}
 
+.clock-border {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+}
 
+.clock-hour-point {
+   position: absolute;
+   transform: translate(-50%, -50%);
+   width: 0.2rem;
+   height: 0.2rem;
+   background-color: white;
+   border-radius: 50%;
+}
 
-  /* clock pointer */
+.clock-hour-point:nth-child(6n + 1) {
+   width: 0.4rem;
+   height: 0.4rem;
+}
 
-  .clock-pointer > span {
-    width: 0.5rem;
-    height: 0.5rem;
-    transform: translate(-50%, -50%);
-    background-color: var(--background);
-    border-radius: 50%;
-    position: absolute;
-    /* border: 0.1rem solid white */
+.clock-border-title > span {
+   position: absolute;
+   transform: translate(-50%, -50%);
+   font-size: 1rem;
+}
 
+/* clock pointer */
+
+.clock-pointer > span {
+   width: 0.7rem;
+   height: 0.7rem;
+   transform: translate(-50%, -50%);
+   background-color: var(--background);
+   border-radius: 50%;
+   position: absolute;
+}
+
+/* clock display */
+
+.clock-display > div {
+   font-size: 1.2rem;
+   position: absolute;
+   transform: translate(-50%, -50%);
+   top: 50%;
+   left: 50%;
+   display: flex;
+   gap: 0.2rem;
+}
+
+.clock-display > div > *:nth-child(1) {
+   width: 2rem;
+   display: flex;
+   justify-content: flex-end;
+} 
+
+.clock-display > div > *:nth-child(3) {
+   width: 2rem;
+   display: flex;
+   justify-content: flex-start ;
+}
+
+ /* sun moon icons  */
+
+.clock-sunmoon-icons > * {
+   font-size: 1rem;
+   position: absolute;
+   color: #3D3D3D;
+   transform: translate(-50%, -50%);
+}
+
+.clock-sunmoon-icons > *:nth-child(1){
+   color: #2B2D18;
 }
