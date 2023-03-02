@@ -75,9 +75,6 @@ export function SunMoonInfo() {
                             astroData && moonPhasePicker(astroData?.astronomy.astro.moon_phase)
                         }
                     </div>
-                    <span>{astroData && astroData.astronomy.astro.moon_phase.split(" ")[0]}</span>
-                    <span>{astroData && astroData.astronomy.astro.moon_phase.split(" ")[1]}</span>
-
                 </div>
             </div>
         </>
