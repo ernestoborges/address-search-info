@@ -23,7 +23,6 @@ export function SunMoonClock() {
             return (`${(Number(date.split(":")[0]) === 12 ? 12 : Number(date.split(":")[0]) + 12).toString()}:${date.split(" ")[0].split(":")[1]}`)
         }
         return (Number(date.split(":")[0]) >= 12 ? (Number(date.split(":")[0]) - 12).toString() + ":" + date.split(" ")[0].split(":")[1] : date.split(" ")[0])
-
     }
 
     function astroPosDegree(sunStart: string, sunEnd: string, moonStart: string, moonEnd: string, current: string) {
@@ -151,8 +150,6 @@ export function SunMoonClock() {
                     </div>
                 </div>
                 <br/><br/><br/>
-                <span>{moonPosDegree.startDegree}</span><br/>
-                <span>{moonPosDegree.endDegree}</span>
             </div>
         </>
     )
