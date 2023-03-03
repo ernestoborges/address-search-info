@@ -2,123 +2,38 @@ import "./styles.css"
 import { useContext, useEffect, useState } from "react";
 import WeatherDataContext from "../../contexts/WeatherDataProvider";
 import { IoIosMoon, IoIosSunny } from "react-icons/io"
-import {
-    WiMoonAltNew,
-    WiMoonAltFull,
-    WiMoonAltWaxingCrescent3,
-    WiMoonAltWaxingGibbous3,
-    WiMoonAltFirstQuarter,
-    WiMoonAltWaningGibbous3,
-    WiMoonAltThirdQuarter,
-    WiMoonAltWaningCrescent3,   
-    // WiMoonAltWaxing6
-} from "react-icons/wi"
+import { astroPosition, clockDotsPosition, conicString, moonPhasePicker } from "../../functions/functions";
 
 export function SunMoonClock() {
 
-    const astroData = useContext(WeatherDataContext)?.astroData;
+    const astroData = useContext(WeatherDataContext)?.weatherData?.forecast.forecastday[0].astro;
+    const localtionData = useContext(WeatherDataContext)?.weatherData?.location;
 
-    const [sunPosDegree, setSunPosDegree] = useState({
-        startDegree: 0,
-        endDegree: 0,
-        currentHourDegree: 0
-    });
-    const [moonPosDegree, setMoonPosDegree] = useState({
-        startDegree: 0,
-        endDegree: 0,
-        currentHourDegree: 0
-    });
-
-    function hour24Format(date: string) {
-        if (date.split(" ")[1] === "PM") {
-            return (`${(Number(date.split(":")[0]) === 12 ? 12 : Number(date.split(":")[0]) + 12).toString()}:${date.split(" ")[0].split(":")[1]}`)
+    const [astroPosDegree, setAstroPosDegree] = useState({
+        sun: {
+            startDegree: 0,
+            endDegree: 0,
+            currentHourDegree: 0
+        },
+        moon: {
+            startDegree: 0,
+            endDegree: 0,
+            currentHourDegree: 0
         }
-        return (Number(date.split(":")[0]) >= 12 ? (Number(date.split(":")[0]) - 12).toString() + ":" + date.split(" ")[0].split(":")[1] : date.split(" ")[0])
-    }
-
-    function astroPosDegree(sunStart: string, sunEnd: string, moonStart: string, moonEnd: string, current: string) {
-
-        const sunStartDecimalHour = Number(hour24Format(sunStart).split(":")[0]) + (Number(hour24Format(sunStart).split(":")[1]) / 60)
-        const sunEndDecimalHour = Number(hour24Format(sunEnd).split(":")[0]) + (Number(hour24Format(sunEnd).split(":")[1]) / 60)
-
-        const moonStartDecimalHour = Number(hour24Format(moonStart).split(":")[0]) + (Number(hour24Format(moonStart).split(":")[1]) / 60)
-        const moonEndDecimalHour = Number(hour24Format(moonEnd).split(":")[0]) + (Number(hour24Format(moonEnd).split(":")[1])) / 60
-
-        const currentDecimalHour = Number(current.split(" ")[1].split(":")[0]) + (Number(current.split(" ")[1].split(":")[1]) / 60)
-
-        const sunStartDegree = (sunStartDecimalHour > 24 ? sunStartDecimalHour - 12 : sunStartDecimalHour) * 360 / 24;
-        const sunEndDegree = (sunEndDecimalHour > 24 ? sunEndDecimalHour - 12 : sunEndDecimalHour) * 360 / 24;
-
-        const moonStartDegree = moonStartDecimalHour * 360 / 24;
-        const moonEndDegree = moonEndDecimalHour * 360 / 24;
-
-        const currentHourDegree = currentDecimalHour * 360 / 24;
-
-        setSunPosDegree({
-            startDegree: sunStartDegree,
-            endDegree: sunEndDegree,
-            currentHourDegree: currentHourDegree - 180
-        });
-
-        setMoonPosDegree({
-            startDegree: moonStartDegree,
-            endDegree: moonEndDegree,
-            currentHourDegree: currentHourDegree - 180
-        })
-    }
-
-    function conicString(start: number, end: number, background: string, color: string) {
-
-        const val1 = start;
-        const val2 = start < end ? (end - start) * 100 / 360 : 100 + (end - start) * 100 / 360;
-
-        return (
-            `conic-gradient(from ${val1 - 180}deg at 50% 50%, ${background} ${val2}%, ${color} ${val2}% )`
-        )
-    }
-
-    function moonPhasePicker(moon: string) {
-        switch (moon) {
-            case "Full Moon":
-                return <WiMoonAltFull />
-            case "Waning Gibbous":
-                return <WiMoonAltWaningGibbous3 />
-            case "Last Quarter":
-                return <WiMoonAltThirdQuarter />
-            case "Waning Crescent":
-                return <WiMoonAltWaningCrescent3 />
-            case "New Moon":
-                return <WiMoonAltNew />
-            case "Waxing Crescent":
-                return <WiMoonAltWaxingCrescent3 />
-            case "First Quarter":
-                return <WiMoonAltFirstQuarter />
-            case "Waxing Gibbous":
-                return <WiMoonAltWaxingGibbous3 />
-        }
-    }
-
-    function clockDotsPosition(i: number, dots: number, r: number) {
-        const width = 100;
-        const height = 100;
-        const xC = width / 2, yC = height / 2;
-        const radius = ((i * 360 / dots) - 90) * Math.PI / 180;
-
-        const x = xC + (r * Math.sin(-radius))
-        const y = yC - (r * Math.cos(-radius))
-
-        return ({ top: x + "px", left: y + "px" });
-    }
+    })
 
     useEffect(() => {
-        if (astroData)
-            astroPosDegree(
-                astroData.astronomy.astro.sunrise,
-                astroData.astronomy.astro.sunset,
-                astroData.astronomy.astro.moonrise,
-                astroData.astronomy.astro.moonset,
-                astroData.location.localtime
-            )
+        if (astroData && localtionData)
+            setAstroPosDegree(
+                astroPosition(
+                    astroData.sunrise,
+                    astroData.sunset,
+                    astroData.moonrise,
+                    astroData.moonset,
+                    localtionData.localtime
+                )
+            )    
+        
     }, [astroData]);
 
     return (
@@ -127,12 +42,12 @@ export function SunMoonClock() {
                 <div className="sun-moon-container">
                     <div
                         className="sun-clock"
-                        style={{ backgroundImage: conicString(sunPosDegree.startDegree, sunPosDegree.endDegree, "#FBEF00", "#2B2D18") }}
+                        style={{ backgroundImage: conicString(astroPosDegree.sun.startDegree, astroPosDegree.sun.endDegree, "#FBEF00", "#2B2D18") }}
                     >
                         <div>
                             <div
                                 className="moon-clock"
-                                style={{ backgroundImage: conicString(moonPosDegree.startDegree, moonPosDegree.endDegree, "#DEDEDE", "#3D3D3D") }}>
+                                style={{ backgroundImage: conicString(astroPosDegree.moon.startDegree, astroPosDegree.moon.endDegree, "#DEDEDE", "#3D3D3D") }}>
                                 <div>
                                     <div></div>
                                 </div>
@@ -159,7 +74,7 @@ export function SunMoonClock() {
                                     <img src="images/weather/moon-small.png"></img>
                                     <div></div>
                                     {
-                                        astroData && moonPhasePicker(astroData?.astronomy.astro.moon_phase)
+                                        astroData && moonPhasePicker(astroData?.moon_phase)
                                     }
                                 </div>
                             </div>
@@ -167,18 +82,18 @@ export function SunMoonClock() {
                     </div>
                     <div className="clock-sunmoon-icons">
                         <IoIosSunny style={clockDotsPosition(
-                            (sunPosDegree.startDegree + sunPosDegree.endDegree) / 2,
+                            (astroPosDegree.sun.startDegree + astroPosDegree.sun.endDegree) / 2,
                             360,
                             45
                         )} />
                         <IoIosMoon style={clockDotsPosition(
-                            (moonPosDegree.startDegree + moonPosDegree.endDegree) / 2 + 180,
+                            (astroPosDegree.moon.startDegree + astroPosDegree.moon.endDegree) / 2 + 180,
                             360,
                             30.5)} />
                     </div>
                     <div className="clock-pointer">
-                        <span style={clockDotsPosition(sunPosDegree.currentHourDegree + 180, 360, 45)}></span>
-                        <span style={clockDotsPosition(sunPosDegree.currentHourDegree + 180, 360, 31)}></span>
+                        <span style={clockDotsPosition(astroPosDegree.sun.currentHourDegree + 180, 360, 45)}></span>
+                        <span style={clockDotsPosition(astroPosDegree.sun.currentHourDegree + 180, 360, 31)}></span>
                     </div>
                 </div>
             </div>

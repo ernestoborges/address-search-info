@@ -4,33 +4,20 @@ import PlaceContext from "../../contexts/PlaceProvider";
 import WeatherDataContext from "../../contexts/WeatherDataProvider";
 
 export function WeatherData() {
-    // const [weatherData, setWeatherData] = useState<WeatherApiResponse>();
 
     const place = useContext(PlaceContext)?.place;
 
     const weatherData = useContext(WeatherDataContext)?.weatherData;
     const setWeatherData = useContext(WeatherDataContext)?.setWeatherData;
-    const astroData = useContext(WeatherDataContext)?.astroData;
-    const setAstroData = useContext(WeatherDataContext)?.setAstroData;
+    const astroData = useContext(WeatherDataContext)?.weatherData?.forecast.forecastday[0].astro;
 
-    const weatherHTTP = `http://api.weatherapi.com/v1/current.json?key=${import.meta.env.VITE_REACT_APP_WEATHERAPI_API_KEY}&q=${place?.lat},${place?.lng}`
-    const astroHTTP = `http://api.weatherapi.com/v1/astronomy.json?key=${import.meta.env.VITE_REACT_APP_WEATHERAPI_API_KEY}&q=${place?.lat},${place?.lng}`
+    const weatherHTTP = `http://api.weatherapi.com/v1/forecast.json?key=${import.meta.env.VITE_REACT_APP_WEATHERAPI_API_KEY}&q=${place?.lat},${place?.lng}&days=3&aqi=no&alerts=no`
 
     async function fetchWeatherData() {
         try {
             const response = await fetch(weatherHTTP);
-            const data = await response.json();
-            if (setWeatherData) setWeatherData(data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    async function fetchAstroData() {
-        try {
-            const response = await fetch(astroHTTP);
-            const data = await response.json();
-            if (setAstroData) setAstroData(data);
+            const weatherData = await response.json();
+            if (setWeatherData) setWeatherData(weatherData);
         } catch (error) {
             console.error(error);
         }
@@ -39,11 +26,8 @@ export function WeatherData() {
     useEffect(() => {
         if (place?.lat !== undefined) {
             fetchWeatherData();
-            fetchAstroData();
-
         }
     }, [place])
-
 
     return (
         <>
@@ -73,15 +57,15 @@ export function WeatherData() {
             <article>
                 <header><h2>Atro</h2></header>
                 <section>
-                    <p>time: {astroData?.location.localtime}</p>
-                    <p>sunrise: {astroData?.astronomy.astro.sunrise} </p>
-                    <p>sunset:  {astroData?.astronomy.astro.sunset}</p>
-                    <p>moonrise:  {astroData?.astronomy.astro.moonrise}</p>
-                    <p>moonset:  {astroData?.astronomy.astro.moonset}</p>
-                    <p>moon_phase:  {astroData?.astronomy.astro.moon_phase}</p>
-                    <p>moon_illumination:  {astroData?.astronomy.astro.moon_illumination}</p>
-                    <p>is_moon_up:  {astroData?.astronomy.astro.is_moon_up}</p>
-                    <p>is_sun_up: {astroData?.astronomy.astro.is_sun_up}</p>
+                    <p>time: {weatherData?.location.localtime}</p>
+                    <p>sunrise: {astroData?.sunrise} </p>
+                    <p>sunset:  {astroData?.sunset}</p>
+                    <p>moonrise:  {astroData?.moonrise}</p>
+                    <p>moonset:  {astroData?.moonset}</p>
+                    <p>moon_phase:  {astroData?.moon_phase}</p>
+                    <p>moon_illumination:  {astroData?.moon_illumination}</p>
+                    <p>is_moon_up:  {astroData?.is_moon_up}</p>
+                    <p>is_sun_up: {astroData?.is_sun_up}</p>
                 </section>
             </article>
         </>

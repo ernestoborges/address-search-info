@@ -10,9 +10,7 @@ export function AutocompleteSearchBar() {
   const inputRef = useRef<HTMLInputElement>(null);
   const blurTimeout = useRef<number | null>(null);
 
-  const place = useContext(PlaceContext)?.place;
   const setPlace = useContext(PlaceContext)?.setPlace;
-  const map = useContext(PlaceContext)?.map;
 
   const {
     ready,
