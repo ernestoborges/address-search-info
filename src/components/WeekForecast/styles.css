@@ -21,7 +21,7 @@
     flex-direction: column;
     width: 100%;
 }
-.week-forecast-section > ul > li {
+.list-content {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -29,22 +29,22 @@
     gap: 2rem;
 }
 
-.week-forecast-section > ul > li > div:first-child {
+.list-content > div:first-child {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.week-forecast-section > ul > li > div:first-child > img {
+.list-content > div:first-child > img {
     width: 5rem;
 }
 
-.week-forecast-section > ul > li > div:nth-child(2) {
+.list-content > div:nth-child(2) {
     font-size: 2rem;
     font-weight: bold;
 }
 
-.week-forecast-section > ul > li > div:nth-child(3) {
+.list-content > div:nth-child(3) {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -52,23 +52,26 @@
     width: 100%;
 }
 
-.week-forecast-section > ul > li > div > div:first-child {
+.list-content > div > div:first-child {
     font-weight: bold;
     display: flex;
     gap: 1rem;
 }
-.week-forecast-section > ul > li > div > div:nth-child(2) {
+.list-content > div > div:nth-child(2) {
     color: var(--secondary-text-color);
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
 }
 
-.week-forecast-section > ul > li > div > div:nth-child(2) > span:first-child,
-.week-forecast-section > ul > li > div > div:nth-child(2) > span:last-child {
+.list-content > div > div:nth-child(2) > span:first-child,
+.list-content > div > div:nth-child(2) > span:last-child {
     color: var(--main-text-color);
     font-size: 2rem;
     font-weight: bold;
 }
 
-.week-forecast-section > ul > hr {
+.week-forecast-section > ul > li > hr {
     margin: 1rem 0;
     border-color: var(--secondary-text-color);
     opacity: 0.2;

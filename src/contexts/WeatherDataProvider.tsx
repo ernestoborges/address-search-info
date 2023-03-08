@@ -43,7 +43,7 @@ interface WeatherApiResponse {
         gust_kph: number;
     };
     forecast: {
-        forecastday: [{
+        forecastday: {
             date: string,
             date_epoch: number,
             day: {
@@ -82,8 +82,7 @@ interface WeatherApiResponse {
                 is_moon_up: number
                 is_sun_up: number
             },
-            hour: [
-                {
+            hour: {
                     time_epoch: number,
                     time: string,
                     temp_c: number,
@@ -121,9 +120,8 @@ interface WeatherApiResponse {
                     gust_mph: number,
                     gust_kph: number,
                     uv: number
-                }
-            ]
-        }]
+                }[]
+        }[]
     };
     astronomy: {
         astro: {

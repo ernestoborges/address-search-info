@@ -24,11 +24,11 @@ export function SummarizedInfo() {
                     </span>
                     <div className="max-min-container">
                         <span className="max">
-                            {`${"00"}º`}
+                            {weatherData && `${Math.round(weatherData?.forecast.forecastday[0].day.maxtemp_c)}º`}
                         </span>
                         /
                         <span className="min">
-                            {`${"00"}º`}
+                            {weatherData && `${Math.round(weatherData?.forecast.forecastday[0].day.mintemp_c)}º`}
                         </span>
                     </div>
                 </div>

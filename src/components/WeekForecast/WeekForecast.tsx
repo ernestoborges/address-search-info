@@ -13,15 +13,15 @@ export function WeekForecast() {
     return (
         <>
             <div>
-                <h2>3 day forecasts</h2>
+                <h2>3 day forecast</h2>
                 <span>max/min</span>
             </div>
             <ul className="forecast-days-list">
                 {
                     weatherData &&
-                    weatherData.forecast.forecastday.map((day, index) =>
-                        <>
-                            <li key={index}>
+                    weatherData.forecast.forecastday.map((day, index) => (
+                        <li key={index}>
+                            <div className="list-content">
                                 <div>
                                     <img src={day.day.condition.icon} />
                                     <span>
@@ -41,10 +41,10 @@ export function WeekForecast() {
                                         <span>{Math.round(day.day.mintemp_c)}º</span>
                                     </div>
                                 </div>
-                            </li>
-                            {index < weatherData.forecast.forecastday.length - 1 && <hr></hr>}
-                        </>
-                    )
+                            </div>
+                            {weatherData.forecast.forecastday.length - 1 > index && <hr></hr>}
+                        </li>
+                    ))
                 }
             </ul>
         </>
