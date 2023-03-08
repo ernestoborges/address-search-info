@@ -44,7 +44,7 @@ interface WeatherApiResponse {
     };
     forecast: {
         forecastday: [{
-            data: string,
+            date: string,
             date_epoch: number,
             day: {
                 maxtemp_c: number

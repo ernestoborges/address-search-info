@@ -1,15 +1,14 @@
 .summarized-info-section {
-    position: relative;
-    width: 20rem;
-    height: 20rem;
-    border-radius: 0.4rem;
     overflow: hidden;
+    height: 20rem;
+    padding: 0;
   }
   
   .summarized-info-section img {
     /* filter: blur(px); */
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
   
   .summarized-info-section > div {
@@ -29,9 +28,9 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justfy-content: center;
+    justify-content: center;
     background-color: rgba(255, 255, 255, .15);  
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(12px);
     padding: 0.2rem 1rem;
   }
   
@@ -95,6 +94,8 @@
     backdrop-filter: blur(5px);
     padding: 0.2rem 0.4rem;
     font-size: 1rem;
+    display: flex;
+    justify-content: center;
   }
 
  

@@ -1,7 +1,7 @@
 import { GoogleMap, Marker} from '@react-google-maps/api';
 import { useContext, useEffect } from 'react';
 import PlaceContext from '../../contexts/PlaceProvider';
-
+import "./styles.css"
 
 export function Map() {
 
@@ -19,7 +19,7 @@ export function Map() {
     return (
         <>
             <GoogleMap
-                mapContainerStyle={{ width: "350px", height: "250px" }}
+                mapContainerStyle={{ width: "100%", height: "100%" }}
                 center={center}
                 zoom={15}
                 options={{

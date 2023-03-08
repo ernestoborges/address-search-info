@@ -8,7 +8,7 @@ export function SummarizedInfo() {
     const weatherData = useContext(WeatherDataContext)?.weatherData;
 
     return (
-        <section className="summarized-info-section">
+       <>
             <img src={`images/weather/${weatherData ? weatherData.current.is_day === 1 ? "day" : "night" : "day"}/${simplifyWeatherCloud(weatherData ? weatherData.current.condition.text:"Sunny")}.jpg`} alt="" />
             <div>
                 <div className="place-name">
@@ -38,6 +38,6 @@ export function SummarizedInfo() {
                     </span>
                 </div>
             </div>
-        </section>
+        </>
     )
 }

@@ -6,6 +6,7 @@ import { Map } from './components/Map/Map';
 import { SummarizedInfo } from './components/SummarizedInfo/SummarizedInfo';
 import { SunMoonInfo } from './components/SunMoonClock/SunMoonInfo';
 import { WeatherData } from './components/WeatherData/WeatherData';
+import { WeekForecast } from './components/WeekForecast/WeekForecast';
 
 const libraries: ["places" | "drawing" | "geometry" | "localContext" | "visualization"] = ['places'];
 
@@ -21,18 +22,23 @@ function App() {
   return (
     <div className="App">
       {isLoaded &&
-        <div className="map-search-container">
-          <section className="map-section">
+        <div className="main-container">
+          <section className="main-section map-section">
             <div className="search-container">
               <AutocompleteSearchBar />
             </div>
             <Map />
           </section>
-          <SummarizedInfo />
-          <section className="sun-clock-section">
+          <section className="main-section summarized-info-section">
+            <SummarizedInfo />
+          </section>
+          <section className="main-section sun-clock-section">
             <SunMoonInfo />
           </section>
-          <section className="weather-info-section">
+          <section className='main-section week-forecast-section'>
+            <WeekForecast />
+          </section>
+          <section className="main-section weather-info-section">
             <WeatherData />
           </section>
         </div>

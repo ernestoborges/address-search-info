@@ -2,18 +2,12 @@ import { BsSunFill, BsMoonFill } from "react-icons/bs"
 import { useContext } from "react";
 import WeatherDataContext from "../../contexts/WeatherDataProvider";
 import { SunMoonClock } from "./SunMoonClock";
+import { hour24Format } from "../../functions/functions";
 
 export function SunMoonInfo() {
 
     const astroData = useContext(WeatherDataContext)?.weatherData?.forecast.forecastday[0].astro;
     const localtionData = useContext(WeatherDataContext)?.weatherData?.location;
-
-    function hour24Format(date: string) {
-        if (date.split(" ")[1] === "PM") {
-            return (`${(Number(date.split(":")[0]) === 12 ? 12 : Number(date.split(":")[0]) + 12).toString()}:${date.split(" ")[0].split(":")[1]}`)
-        }
-        return (Number(date.split(":")[0]) >= 12 ? (Number(date.split(":")[0]) - 12).toString() + ":" + date.split(" ")[0].split(":")[1] : date.split(" ")[0])
-    }
 
     return (
         <>
