@@ -6,7 +6,6 @@ import { DayForecast } from './components/DayForecast/DayForecast';
 import { Map } from './components/Map/Map';
 import { SummarizedInfo } from './components/SummarizedInfo/SummarizedInfo';
 import { SunMoonInfo } from './components/SunMoonClock/SunMoonInfo';
-import { WeatherData } from './components/WeatherData/WeatherData';
 import { WeekForecast } from './components/WeekForecast/WeekForecast';
 import { WindInfo } from './components/WindInfo/WindInfo';
 import PlaceContext from './contexts/PlaceProvider';
@@ -24,7 +23,7 @@ function App() {
   const place = useContext(PlaceContext)?.place;
   const setWeatherData = useContext(WeatherDataContext)?.setWeatherData;
 
-  const weatherHTTP = `http://api.weatherapi.com/v1/forecast.json?key=${import.meta.env.VITE_REACT_APP_WEATHERAPI_API_KEY}&q=${place?.lat},${place?.lng}&days=3&aqi=no&alerts=no`
+  const weatherHTTP = `https://api.weatherapi.com/v1/forecast.json?key=${import.meta.env.VITE_REACT_APP_WEATHERAPI_API_KEY}&q=${place?.lat},${place?.lng}&days=3&aqi=no&alerts=no`
 
   async function fetchWeatherData() {
     try {
