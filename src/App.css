@@ -1,9 +1,6 @@
 #root {
-  max-width: 1280px;
+  max-width: 1000px;
   width: 100%;
-  /* margin: 0 auto; */
-  /* padding: 2rem; */
-  /* text-align: center; */
 }
 
 .App {
@@ -14,23 +11,17 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
-  grid-template-rows: 1fr auto;
+  grid-auto-rows: 20rem;
+  grid-auto-flow: dense;
   justify-items: center;
   gap: 1rem;
   padding: 0 1rem;
 }
 
-.main-container :first-child {
-  grid-column: 1 / -1;
-}
-
-.week-forecast-section {
-  grid-column: 1 / -1;
-}
-
 /* main sections */
 
 .main-section {
+  /* grid-area: span 1 / span 1; */
   border-radius: 1.2rem;
   overflow: hidden;
   background-color: var(--element-background);
@@ -43,6 +34,27 @@
   padding: 2rem;
 }
 
+.main-container > :first-child {
+  grid-area: 1 / 1 / -1 / -1;
+}
+
+.week-forecast-section {
+  grid-area: span 2 / span 2 / span 2 / span 2;
+}
+
+.day-forecast-section {
+  grid-area: auto / 1 / span 2 / -1;
+}
+
+.wind-info-section {
+  grid-area: span 2 / span 1 ;
+}
+
+@media only screen and (max-width: 470px){
+  .week-forecast-section {
+    grid-area: span 2 / span 1 / span 2 / span 2;
+  }
+}
 
 
 

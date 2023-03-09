@@ -57,15 +57,15 @@ export function SunMoonClock() {
                     <div className="clock-border">
                         {
                             [...Array(24)].map((_, i) => (
-                                <div key={i} className="clock-hour-point" style={clockDotsPosition(i, 24, 55)}></div>
+                                <div key={i} className="clock-hour-point" style={clockDotsPosition(100, 100, i, 24, 55)}></div>
                             ))
                         }
                     </div>
                     <div className="clock-border-title">
-                        <span style={clockDotsPosition(0, 4, 68)} >24</span>
-                        <span style={clockDotsPosition(1, 4, 68)} >6</span>
-                        <span style={clockDotsPosition(2, 4, 68)} >12</span>
-                        <span style={clockDotsPosition(3, 4, 68)} >18</span>
+                        <span style={clockDotsPosition(100, 100, 0, 4, 68)} >24</span>
+                        <span style={clockDotsPosition(100, 100, 1, 4, 68)} >6</span>
+                        <span style={clockDotsPosition(100, 100, 2, 4, 68)} >12</span>
+                        <span style={clockDotsPosition(100, 100, 3, 4, 68)} >18</span>
                     </div>
                     <div className="clock-display">
                         <div>
@@ -82,18 +82,22 @@ export function SunMoonClock() {
                     </div>
                     <div className="clock-sunmoon-icons">
                         <IoIosSunny style={clockDotsPosition(
+                            100,
+                            100,
                             (astroPosDegree.sun.startDegree + astroPosDegree.sun.endDegree) / 2,
                             360,
                             45
                         )} />
                         <IoIosMoon style={clockDotsPosition(
+                            100,
+                            100,
                             (astroPosDegree.moon.startDegree + astroPosDegree.moon.endDegree) / 2 + 180,
                             360,
                             30.5)} />
                     </div>
                     <div className="clock-pointer">
-                        <span style={clockDotsPosition(astroPosDegree.sun.currentHourDegree + 180, 360, 45)}></span>
-                        <span style={clockDotsPosition(astroPosDegree.sun.currentHourDegree + 180, 360, 31)}></span>
+                        <span style={clockDotsPosition(100, 100, astroPosDegree.sun.currentHourDegree + 180, 360, 45)}></span>
+                        <span style={clockDotsPosition(100, 100, astroPosDegree.sun.currentHourDegree + 180, 360, 31)}></span>
                     </div>
                 </div>
             </div>

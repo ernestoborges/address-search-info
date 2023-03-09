@@ -8,6 +8,9 @@ import { SummarizedInfo } from './components/SummarizedInfo/SummarizedInfo';
 import { SunMoonInfo } from './components/SunMoonClock/SunMoonInfo';
 import { WeatherData } from './components/WeatherData/WeatherData';
 import { WeekForecast } from './components/WeekForecast/WeekForecast';
+import { WindInfo } from './components/WindInfo/WindInfo';
+import PlaceContext from './contexts/PlaceProvider';
+import WeatherDataContext from './contexts/WeatherDataProvider';
 
 const libraries: ["places" | "drawing" | "geometry" | "localContext" | "visualization"] = ['places'];
 
@@ -17,6 +20,27 @@ function App() {
     googleMapsApiKey: import.meta.env.VITE_REACT_APP_GOOGLEMAPS_API_KEY,
     libraries
   });
+
+  const place = useContext(PlaceContext)?.place;
+  const setWeatherData = useContext(WeatherDataContext)?.setWeatherData;
+
+  const weatherHTTP = `http://api.weatherapi.com/v1/forecast.json?key=${import.meta.env.VITE_REACT_APP_WEATHERAPI_API_KEY}&q=${place?.lat},${place?.lng}&days=3&aqi=no&alerts=no`
+
+  async function fetchWeatherData() {
+    try {
+      const response = await fetch(weatherHTTP);
+      const weatherData = await response.json();
+      if (setWeatherData) setWeatherData(weatherData);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    if (place?.lat !== undefined) {
+      fetchWeatherData();
+    }
+  }, [place])
 
 
   return (
@@ -35,15 +59,19 @@ function App() {
           <section className="main-section sun-clock-section">
             <SunMoonInfo />
           </section>
+          <section className='main-section wind-info-section'>
+            <WindInfo />
+          </section>
           <section className='main-section week-forecast-section'>
             <WeekForecast />
           </section>
           <section className='main-section day-forecast-section'>
             <DayForecast />
           </section>
-          <section className="main-section weather-info-section">
+
+          {/* <section className="main-section weather-info-section">
             <WeatherData />
-          </section>
+          </section> */}
         </div>
       }
     </div>

@@ -79,9 +79,9 @@ export function moonPhasePicker(moon: string) {
     }
 }
 
-export function clockDotsPosition(i: number, dots: number, r: number) {
-    const width = 100;
-    const height = 100;
+export function clockDotsPosition(width: number, height: number, i: number, dots: number, r: number) {
+    // const width = 100;
+    // const height = 100;
     const xC = width / 2, yC = height / 2;
     const radius = ((i * 360 / dots) - 90) * Math.PI / 180;
 
