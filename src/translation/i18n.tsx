@@ -22,6 +22,7 @@ const resources = {
             summarized_info: {
                 condition: {
                     clear: "Clear",
+                    sunny: "Sunny",
                     partly_cloudy: "Partly cloudy",
                     cloudy: "Cloudy",
                     overcast: "Overcast",
@@ -132,7 +133,8 @@ const resources = {
             },
             summarized_info: {
                 condition: {
-                    clear: "Ensolarado",
+                    clear: "Limpo",
+                    sunny: "Ensolarado",
                     partly_cloudy: "Parcialmente Nublado",
                     cloudy: "Nublado",
                     overcast: "Nublado",
