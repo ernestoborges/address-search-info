@@ -1,0 +1,21 @@
+.map-button {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 0.1rem solid var(--element-background);
+    background-color: var(--element-background);
+    color: var(--mains-text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 1rem;
+    bottom: 2rem;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.my-location-button {
+    bottom: 6rem;
+    color: rgb(234 67 53);
+}

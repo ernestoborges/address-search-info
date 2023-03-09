@@ -1,9 +1,11 @@
 import { useLoadScript } from '@react-google-maps/api';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import './App.css';
 import { AutocompleteSearchBar } from './components/AutocompleteSearchBar/AutocompleteSearchBar';
 import { DayForecast } from './components/DayForecast/DayForecast';
 import { Map } from './components/Map/Map';
+import { CenterMapButton } from './components/MapButtons/CenterMapButton';
+import { MyLocationButton } from './components/MapButtons/MyLocationButton';
 import { SummarizedInfo } from './components/SummarizedInfo/SummarizedInfo';
 import { SunMoonInfo } from './components/SunMoonClock/SunMoonInfo';
 import { WeekForecast } from './components/WeekForecast/WeekForecast';
@@ -41,7 +43,6 @@ function App() {
     }
   }, [place])
 
-
   return (
     <div className="App">
       {isLoaded &&
@@ -50,6 +51,8 @@ function App() {
             <div className="search-container">
               <AutocompleteSearchBar />
             </div>
+            <MyLocationButton />
+            <CenterMapButton />
             <Map />
           </section>
           <section className="main-section summarized-info-section">
@@ -67,10 +70,6 @@ function App() {
           <section className='main-section day-forecast-section'>
             <DayForecast />
           </section>
-
-          {/* <section className="main-section weather-info-section">
-            <WeatherData />
-          </section> */}
         </div>
       }
     </div>
