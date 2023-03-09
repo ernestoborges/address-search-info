@@ -45,7 +45,9 @@ function App() {
 
   return (
     <div className="App">
-      {isLoaded &&
+      {
+        isLoaded &&
+        place &&
         <div className="main-container">
           <section className="main-section map-section">
             <div className="search-container">

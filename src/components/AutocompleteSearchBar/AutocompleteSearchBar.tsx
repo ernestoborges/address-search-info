@@ -24,6 +24,7 @@ export function AutocompleteSearchBar() {
     setValue(address, false);
     const results = await getGeocode({ address });
     const { lat, lng } = await getLatLng(results[0]);
+    console.log({lat, lng})
     setPlace && setPlace({ lat, lng });
     listRef.current && (listRef.current.style.display = "none");
     inputRef.current && inputRef.current.blur();

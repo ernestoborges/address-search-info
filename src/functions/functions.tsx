@@ -8,9 +8,6 @@ import {
     WiMoonAltThirdQuarter,
     WiMoonAltWaningCrescent3,
 } from "react-icons/wi"
-import PlaceContext from "../contexts/PlaceProvider";
-import {useContext} from "react";
-
 
 export function hour24Format(date: string) {
     if (date.split(" ")[1] === "PM") {
@@ -115,6 +112,7 @@ export function simplifyWeatherCloud(condition:string) {
         condition === "Light rain shower" ||
         condition === "Patchy rain possible" ||
         condition === "Light rain" ||
+        condition === "Moderate rain" ||
         condition === "Moderate rain at times" ||
         condition === "Light freezing rain" ||
         condition === "Patchy light rain" ||

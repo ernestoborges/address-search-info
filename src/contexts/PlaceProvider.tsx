@@ -1,4 +1,4 @@
-import { createContext, SetStateAction, useMemo, useState } from "react";
+import { createContext, SetStateAction, useEffect, useMemo, useState } from "react";
 
 
 interface Props {
@@ -11,8 +11,8 @@ interface Place {
 }
 
 interface ValuesProps {
-    place: google.maps.LatLng | google.maps.LatLngLiteral
-    setPlace: React.Dispatch<React.SetStateAction<Place>>
+    place: Place | google.maps.LatLng | google.maps.LatLngLiteral | null
+    setPlace: React.Dispatch<React.SetStateAction<Place | null>>
     center: google.maps.LatLng | google.maps.LatLngLiteral
     map: google.maps.Map | null
     setMap: React.Dispatch<React.SetStateAction<google.maps.Map | null>>
@@ -22,12 +22,25 @@ const PlaceContext = createContext<ValuesProps | null>(null);
 
 export function PlaceProvider({ children }: Props) {
 
-    const center = useMemo(() => ({
-        lat: -21.13956294957754,
-        lng: -41.67632004796125,
-    }), []);
-    const [place, setPlace] = useState(center);
+    const center = {
+        lat: 51.5072178,
+        lng: -0.1275862,
+    }
+
+    const [place, setPlace] = useState<Place | null>(null);
     const [map, setMap] = useState<google.maps.Map | null>(null);
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setPlace({ lat: position.coords.latitude, lng: position.coords.longitude });
+          },
+          (error) => {
+            console.error(error);
+            setPlace(center);
+          }
+        );
+      }, []);
 
     return (
         <PlaceContext.Provider value={{ place, setPlace, center, map, setMap}}>
