@@ -23,7 +23,7 @@ function App() {
   const place = useContext(PlaceContext)?.place;
   const setWeatherData = useContext(WeatherDataContext)?.setWeatherData;
 
-  const weatherHTTP = `https://api.weatherapi.com/v1/forecast.json?key=${import.meta.env.VITE_REACT_APP_WEATHERAPI_API_KEY}&q=${place?.lat},${place?.lng}&days=3&aqi=no&alerts=no`
+  const weatherHTTP = `http://api.weatherapi.com/v1/forecast.json?key=${import.meta.env.VITE_REACT_APP_WEATHERAPI_API_KEY}&q=${place?.lat},${place?.lng}&days=3&aqi=no&alerts=no`
 
   async function fetchWeatherData() {
     try {
