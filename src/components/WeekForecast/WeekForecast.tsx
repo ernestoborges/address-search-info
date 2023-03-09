@@ -1,8 +1,11 @@
 import { useContext } from "react"
+import { useTranslation } from "react-i18next";
 import WeatherDataContext from "../../contexts/WeatherDataProvider"
 import "./styles.css"
 
 export function WeekForecast() {
+
+    const {t} = useTranslation();
 
     function weekDay(date: string, i: number) {
         const dateObj = new Date(date);
@@ -13,8 +16,8 @@ export function WeekForecast() {
     return (
         <>
             <div>
-                <h2>3 day forecast</h2>
-                <span>max/min</span>
+                <h2>{t("week_forecast.title")}</h2>
+                <span>{t("week_forecast.high")}/{t("week_forecast.low")}</span>
             </div>
             <ul className="forecast-days-list">
                 {
@@ -29,11 +32,11 @@ export function WeekForecast() {
                                     </span>
                                 </div>
                                 <div>
-                                    <span>{weekDay(day.date, index)}.</span>
+                                    <span>{t("week_forecast.weekday."+weekDay(day.date, index).toLocaleLowerCase())}.</span>
                                 </div>
                                 <div>
                                     <div>
-                                        <span>{day.day.condition.text}</span>
+                                        <span>{t("summarized_info.condition."+day.day.condition.text.replace(/\s+/g, '_').toLowerCase())}</span>
                                     </div>
                                     <div>
                                         <span>{Math.round(day.day.maxtemp_c)}º</span>

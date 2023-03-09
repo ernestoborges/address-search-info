@@ -2,10 +2,12 @@ import "./styles.css"
 import { useContext, useState } from "react"
 import WeatherDataContext from "../../contexts/WeatherDataProvider"
 import { simplifyWeatherCloud } from "../../functions/functions";
+import { useTranslation } from "react-i18next";
 
 export function SummarizedInfo() {
 
     const weatherData = useContext(WeatherDataContext)?.weatherData;
+    const {t} = useTranslation();
 
     return (
        <>
@@ -34,7 +36,7 @@ export function SummarizedInfo() {
                 </div>
                 <div className="condition-name">
                     <span>
-                        {weatherData?.current.condition.text}
+                        {t("summarized_info.condition."+weatherData?.current.condition.text.replace(/\s+/g, '_').toLowerCase())}
                     </span>
                 </div>
             </div>

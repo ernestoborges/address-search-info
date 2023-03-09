@@ -2,6 +2,7 @@ import WeatherDataContext from "../../contexts/WeatherDataProvider"
 import { clockDotsPosition } from "../../functions/functions"
 import { useContext } from "react"
 import "./styles.css"
+import { useTranslation } from "react-i18next"
 
 export function WindInfo() {
 
@@ -26,6 +27,8 @@ export function WindInfo() {
 
     const weatherData = useContext(WeatherDataContext)?.weatherData;
 
+    const { t } = useTranslation();
+
     return (
 
         <>
@@ -33,13 +36,22 @@ export function WindInfo() {
                 weatherData &&
                 <>
                     <div className="wind-info">
-                        <h2>Wind</h2>
+                        <h2>{t("wind_info.title")}</h2>
                         <ul>
-                            <li>Speed: {weatherData.current.wind_kph} km/h</li>
+                            <li>
+                                <span>{t("wind_info.speed")}</span>
+                                <span>{weatherData.current.wind_kph} km/h</span>
+                            </li>
                             <hr></hr>
-                            <li>Direction: {weatherData.current.wind_dir}</li>
+                            <li>
+                                <span>{t("wind_info.direction")}</span>
+                                <span>{t("wind_info.direction_subtitle."+weatherData.current.wind_dir.toLocaleLowerCase())}</span>
+                            </li>
                             <hr></hr>
-                            <li>Degree: {weatherData.current.wind_degree}º</li>
+                            <li>
+                                <span>{t("wind_info.degree")}</span>
+                                <span>{weatherData.current.wind_degree}º</span>
+                            </li>
                         </ul>
                     </div>
                     <div className="wind-rose-container">
@@ -61,7 +73,7 @@ export function WindInfo() {
                                             className={dir.text == weatherData.current.wind_dir.toLocaleLowerCase() ? "selected-dir" : ""}
                                             style={clockDotsPosition(160, 160, index, subtitles.length, 75)}
                                         >
-                                            {dir.text}
+                                            {t("wind_info.direction_subtitle."+dir.text)}
                                         </span>
                                     ))
                                 }

@@ -1,11 +1,14 @@
 import WeatherDataContext from "../../contexts/WeatherDataProvider"
 import { useContext, useEffect, useState } from "react";
 import "./styles.css"
+import { useTranslation } from "react-i18next";
 
 export function DayForecast() {
 
     const weatherData = useContext(WeatherDataContext)?.weatherData;
     const [fullDayData, setFullDayData] = useState(weatherData?.forecast.forecastday[0].hour);
+
+    const {t} = useTranslation();
 
     function handleDayData() {
         const hourNow = Number(weatherData?.location.localtime.split(" ")[1].split(":")[0]);
@@ -28,7 +31,7 @@ export function DayForecast() {
 
     return (
         <>
-            <h2>24 hours forecast</h2>
+            <h2>{t("day_forecast.title")}</h2>
             <ul>
                 {
                     fullDayData && fullDayData.map((hour, index) => (
@@ -44,7 +47,7 @@ export function DayForecast() {
                             <span className="extra-data">
                                 <img src={hour.condition.icon} />
                                 <span>
-                                    {hour.gust_kph + "km/h"}
+                                    {hour.wind_kph.toFixed(1) + "km/h"}
                                 </span>
                                 <span>
                                     {hour.time.split(" ")[1]}

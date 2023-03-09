@@ -3,11 +3,14 @@ import { useContext } from "react";
 import WeatherDataContext from "../../contexts/WeatherDataProvider";
 import { SunMoonClock } from "./SunMoonClock";
 import { hour24Format } from "../../functions/functions";
+import { useTranslation } from "react-i18next";
 
 export function SunMoonInfo() {
 
     const astroData = useContext(WeatherDataContext)?.weatherData?.forecast.forecastday[0].astro;
     const localtionData = useContext(WeatherDataContext)?.weatherData?.location;
+
+    const {t} = useTranslation();
 
     return (
         <>
@@ -24,8 +27,8 @@ export function SunMoonInfo() {
                     <span>{localtionData && localtionData.localtime.split(" ")[1].split(":")[1]}</span>
                 </div>
                 <div className="moon-name-container">
-                    <span>{astroData && astroData.moon_phase.split(" ")[0]}</span>
-                    <span>{astroData && astroData.moon_phase.split(" ")[1]}</span>
+                    <span>{astroData && t("sun_moon_clock.moon_phase."+astroData.moon_phase.replace(/\s+/g, '_').toLowerCase()).split(" ")[0]}</span>
+                    <span>{astroData && t("sun_moon_clock.moon_phase."+astroData.moon_phase.replace(/\s+/g, '_').toLowerCase()).split(" ")[1]}</span>
                 </div>
             </div>
             <div className="table-n-icon-wraper">

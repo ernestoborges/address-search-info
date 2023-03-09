@@ -3,6 +3,7 @@ import { useContext, useRef } from "react";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
 import PlaceContext from "../../contexts/PlaceProvider";
 import { IoLocationSharp } from "react-icons/io5"
+import { useTranslation } from "react-i18next";
 
 export function AutocompleteSearchBar() {
 
@@ -47,6 +48,9 @@ export function AutocompleteSearchBar() {
     clearTimeout(blurTimeout.current!);
   }
 
+const {t} = useTranslation();
+const searchBarPlaceholder = t("autocomplete.placeholder");
+
   return (
     <>
       <label>
@@ -55,7 +59,7 @@ export function AutocompleteSearchBar() {
           className="autocomplete-input"
           type="text" value={value}
           onChange={(e) => setValue(e.target.value)} 
-          placeholder="Search location here..."
+          placeholder={searchBarPlaceholder}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
         />

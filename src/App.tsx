@@ -5,6 +5,7 @@ import { AutocompleteSearchBar } from './components/AutocompleteSearchBar/Autoco
 import { DayForecast } from './components/DayForecast/DayForecast';
 import { Map } from './components/Map/Map';
 import { CenterMapButton } from './components/MapButtons/CenterMapButton';
+import { LangButton } from './components/MapButtons/LangButton';
 import { MyLocationButton } from './components/MapButtons/MyLocationButton';
 import { SummarizedInfo } from './components/SummarizedInfo/SummarizedInfo';
 import { SunMoonInfo } from './components/SunMoonClock/SunMoonInfo';
@@ -12,6 +13,7 @@ import { WeekForecast } from './components/WeekForecast/WeekForecast';
 import { WindInfo } from './components/WindInfo/WindInfo';
 import PlaceContext from './contexts/PlaceProvider';
 import WeatherDataContext from './contexts/WeatherDataProvider';
+import i18n from './translation/i18n';
 
 const libraries: ["places" | "drawing" | "geometry" | "localContext" | "visualization"] = ['places'];
 
@@ -55,6 +57,7 @@ function App() {
             </div>
             <MyLocationButton />
             <CenterMapButton />
+            <LangButton />
             <Map />
           </section>
           <section className="main-section summarized-info-section">

@@ -29,6 +29,14 @@
    opacity: 0.2;
 }
 
+.wind-info > ul > li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.wind-info > ul > li > span:first-child {
+    color: var(--secondary-text-color);
+}
 
 /* wind rose  */
 
