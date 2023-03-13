@@ -9,9 +9,10 @@ export function LangButton() {
     const [selectedLang, setSelectedLang] = useState(i18n.language)
 
     useEffect(()=>{
-        i18n.changeLanguage(selectedLang)
+        i18n.changeLanguage(selectedLang);
+        localStorage.setItem("language", selectedLang);
     }, [selectedLang])
-
+    
     return (
         <>
             <button 

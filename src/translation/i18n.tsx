@@ -228,15 +228,25 @@ const resources = {
     }
 };
 
+function getSavedLanguage(){
+    const savedLanguage = localStorage.getItem("language");
+    if(savedLanguage){
+        return savedLanguage
+    } else {
+        return null
+    }
+}
+
 i18n
     .use(initReactI18next)
     .init({
         resources,
-        lng: 'en',
         fallbackLng: 'en',
         interpolation: {
             escapeValue: false
-        }
+        },
+        supportedLngs: ["en", "pt"],
+        lng: getSavedLanguage() || ( navigator.language === "pt" ? navigator.language : "en" )
     });
 
 export default i18n;
