@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 
 export function DayForecast() {
 
-    const carouselRef = useRef();
+    const carouselRef = useRef<HTMLDivElement>(null);
 
     const weatherData = useContext(WeatherDataContext)?.weatherData;
     const [fullDayData, setFullDayData] = useState(weatherData?.forecast.forecastday[0].hour);
@@ -43,7 +43,7 @@ export function DayForecast() {
                 <motion.ul
                     className="scroll-container"
                     drag="x"
-                    dragConstraints={{right: 0, left: -(carouselRef.current?.scrollWidth - carouselRef.current?.offsetWidth)}}
+                    dragConstraints={{right: 0, left: -((carouselRef.current?.scrollWidth ?? 0) - (carouselRef.current?.offsetWidth ?? 0)) }}
                     style={{width: carouselRef.current?.scrollWidth}}
                 >
                     {
