@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@react-google-maps/api": "^2.18.1",
+    "framer-motion": "^10.3.0",
     "i18next": "^22.4.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

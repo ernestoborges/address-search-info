@@ -1,14 +1,17 @@
 import WeatherDataContext from "../../contexts/WeatherDataProvider"
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "./styles.css"
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion"
 
 export function DayForecast() {
+
+    const carouselRef = useRef();
 
     const weatherData = useContext(WeatherDataContext)?.weatherData;
     const [fullDayData, setFullDayData] = useState(weatherData?.forecast.forecastday[0].hour);
 
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     function handleDayData() {
         const hourNow = Number(weatherData?.location.localtime.split(" ")[1].split(":")[0]);
@@ -32,31 +35,42 @@ export function DayForecast() {
     return (
         <>
             <h2>{t("day_forecast.title")}</h2>
-            <ul>
-                {
-                    fullDayData && fullDayData.map((hour, index) => (
-                        <li key={index}>
-                            <span className="temperature-data">
-                                {Math.round(hour.temp_c)}º
-                            </span>
-                            <div
-                                className="temperature-bar"
-                                style={{ height: handleTemperatureBarSize(hour.temp_c) + "px" }}
-                            >
-                            </div>
-                            <span className="extra-data">
-                                <img src={hour.condition.icon} />
-                                <span>
-                                    {hour.wind_kph.toFixed(1) + "km/h"}
+            <motion.div
+                className="carousel"
+                whileTap={{ cursor: "grabbing" }}
+                ref={carouselRef}
+            >
+                <motion.ul
+                    className="scroll-container"
+                    drag="x"
+                    dragConstraints={{right: 0, left: -(carouselRef.current?.scrollWidth - carouselRef.current?.offsetWidth)}}
+                    style={{width: carouselRef.current?.scrollWidth}}
+                >
+                    {
+                        fullDayData && fullDayData.map((hour, index) => (
+                            <li key={index}>
+                                <span className="temperature-data">
+                                    {Math.round(hour.temp_c)}º
                                 </span>
-                                <span>
-                                    {hour.time.split(" ")[1]}
+                                <div
+                                    className="temperature-bar"
+                                    style={{ height: handleTemperatureBarSize(hour.temp_c) + "px" }}
+                                >
+                                </div>
+                                <span className="extra-data">
+                                    <img src={hour.condition.icon} />
+                                    <span>
+                                        {hour.wind_kph.toFixed(1) + "km/h"}
+                                    </span>
+                                    <span>
+                                        {hour.time.split(" ")[1]}
+                                    </span>
                                 </span>
-                            </span>
-                        </li>
-                    ))
-                }
-            </ul>
+                            </li>
+                        ))
+                    }
+                </motion.ul>
+            </motion.div>
         </>
     )
 }
