@@ -32,8 +32,14 @@ export function astroPosition(sunStart: string, sunEnd: string, moonStart: strin
     const sunStartDegree = (sunStartDecimalHour > 24 ? sunStartDecimalHour - 12 : sunStartDecimalHour) * 360 / 24;
     const sunEndDegree = (sunEndDecimalHour > 24 ? sunEndDecimalHour - 12 : sunEndDecimalHour) * 360 / 24;
 
-    const moonStartDecimalHour = Number(hour24Format(moonStart).split(":")[0]) + (Number(hour24Format(moonStart).split(":")[1]) / 60)
-    const moonEndDecimalHour = Number(hour24Format(moonEnd).split(":")[0]) + (Number(hour24Format(moonEnd).split(":")[1])) / 60
+    const moonStartDecimalHour = moonStart !== "No moonrise"
+        ? Number(hour24Format(moonStart).split(":")[0]) + (Number(hour24Format(moonStart).split(":")[1]) / 60)
+        : 0
+
+    const moonEndDecimalHour = moonEnd !== "No moonset" 
+        ? Number(hour24Format(moonEnd).split(":")[0]) + (Number(hour24Format(moonEnd).split(":")[1])) / 60
+        : 24
+
     const moonStartDegree = moonStartDecimalHour * 360 / 24;
     const moonEndDegree = moonEndDecimalHour * 360 / 24;
 
@@ -86,20 +92,20 @@ export function clockDotsPosition(width: number, height: number, i: number, dots
     return ({ top: x + "px", left: y + "px" });
 }
 
-export function simplifyWeatherCloud(condition:string) {
+export function simplifyWeatherCloud(condition: string) {
     if (
         condition === "Sunny" ||
         condition === "Clear"
     ) {
-        return("clean");
+        return ("clean");
     }
     if (condition === "Partly cloudy") {
-        return("partial-cloud");
+        return ("partial-cloud");
     }
     if (condition === "Cloudy" ||
         condition === "Overcast" ||
         condition === "Mist") {
-            return("cloudy");
+        return ("cloudy");
     }
     if (
         condition === "Patchy light drizzle" ||
@@ -118,7 +124,7 @@ export function simplifyWeatherCloud(condition:string) {
         condition === "Light sleet showers" ||
         condition === "Moderate or heavy sleet showers"
     ) {
-        return("rain");
+        return ("rain");
     }
 
     if (
@@ -130,7 +136,7 @@ export function simplifyWeatherCloud(condition:string) {
         condition === "Torrential rain shower" ||
         condition === "Thundery outbreaks possible"
     ) {
-        return("storm");
+        return ("storm");
     }
     if (
         condition === "Patchy light snow with thunder" ||
@@ -156,11 +162,11 @@ export function simplifyWeatherCloud(condition:string) {
         condition === "Patchy freezing possible"
 
     ) {
-        return("snow");
+        return ("snow");
     }
     if (
         condition === "Fog" ||
         condition === "Freezing fog") {
-            return("fog");
+        return ("fog");
     }
 }

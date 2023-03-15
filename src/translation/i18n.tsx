@@ -15,7 +15,7 @@ const resources = {
                     waxing_gibbous: "Waxing Gibbous",
                     full_moon: "Full Moon",
                     waning_gibbous: "Waning Gibbous",
-                    third_quarter: "Third Quarter",
+                    last_quarter: "Third Quarter",
                     waning_crescent: "Wanning Crescent"
                 }
             },
@@ -127,7 +127,7 @@ const resources = {
                     waxing_gibbous: "Gibosa Crescente",
                     full_moon: "Lua Cheia",
                     waning_gibbous: "Gibosa Minguate",
-                    third_quarter: "Quarto Minguante",
+                    last_quarter: "Quarto Minguante",
                     waning_crescent: "Minguante"
                 }
             },
