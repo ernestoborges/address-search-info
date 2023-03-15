@@ -1,15 +1,18 @@
 import WeatherDataContext from "../../contexts/WeatherDataProvider"
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import "./styles.css"
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion"
 
+
 export function DayForecast() {
 
-    const carouselRef = useRef<HTMLDivElement>(null);
+    const [containerKey, setContainerKey] = useState(0);
+    const [leftConstraint, setLeftConstraint] = useState(0);
 
     const weatherData = useContext(WeatherDataContext)?.weatherData;
     const [fullDayData, setFullDayData] = useState(weatherData?.forecast.forecastday[0].hour);
+    const [temperatureRange, setTemperatureRange] = useState({ max: 0, min: 0 });
 
     const { t } = useTranslation();
 
@@ -18,33 +21,62 @@ export function DayForecast() {
         const todayData = weatherData && weatherData?.forecast.forecastday[0].hour.filter((_, index) => index >= hourNow)
         const tomorrowData = weatherData && weatherData?.forecast.forecastday[1].hour.filter((_, index) => index <= hourNow)
         todayData && tomorrowData && setFullDayData(todayData.concat(tomorrowData))
-
     }
 
-    const handleTemperatureBarSize = (tempNow: number) => {
-        const higherTemp = fullDayData ? Math.max(...fullDayData.map((day) => day.temp_c)) : 0
-        const lowerTemp = fullDayData ? Math.min(...fullDayData.map((day) => day.temp_c)) : 0
+    const handleLeftConstraint = useCallback(() => {
+        const el = document.getElementById("carousel-id");
+        if (el) {
+            setLeftConstraint(el.scrollWidth - el.offsetWidth);
+        }
+    }, ["carousel-id"])
 
-        return ((tempNow - lowerTemp) * 100) / (higherTemp - lowerTemp) + 10
+    const handleTemperatureBarSize = (tempNow: number) => {
+        const {max, min} = temperatureRange
+        return ((tempNow - min) * 100) / (max - min) + 10
     }
 
     useEffect(() => {
         handleDayData();
     }, [weatherData])
 
+    useMemo(() => {
+        const max = fullDayData ? Math.max(...fullDayData.map((day) => day.temp_c)) : 0
+        const min = fullDayData ? Math.min(...fullDayData.map((day) => day.temp_c)) : 0
+        setTemperatureRange({
+            max: max,
+            min: min
+        })
+    }, [fullDayData])
+
+    useEffect(() => {
+        const handleResize = () => {
+            setContainerKey((prev) => prev + 1);
+            handleLeftConstraint();
+        };
+        window.addEventListener("resize", handleResize);
+        handleLeftConstraint();
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [handleLeftConstraint]);
+
     return (
         <>
             <h2>{t("day_forecast.title")}</h2>
             <motion.div
+
                 className="carousel"
                 whileTap={{ cursor: "grabbing" }}
-                ref={carouselRef}
             >
                 <motion.ul
                     className="scroll-container"
                     drag="x"
-                    dragConstraints={{right: 0, left: -((carouselRef.current?.scrollWidth ?? 0) - (carouselRef.current?.offsetWidth ?? 0)) }}
-                    style={{width: carouselRef.current?.scrollWidth}}
+                    id="carousel-id"
+                    key={containerKey}
+                    dragConstraints={{
+                        right: 0,
+                        left: -leftConstraint
+                    }}
                 >
                     {
                         fullDayData && fullDayData.map((hour, index) => (

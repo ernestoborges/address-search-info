@@ -2,7 +2,7 @@
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .day-forecast-section > h2 {
@@ -12,24 +12,24 @@
 
 .carousel {
     width: 100%;
-    overflow: hidden;
     cursor: grab;
     user-select: none;
+    overflow-x:hidden;
 }
 
 .scroll-container {
-    border-top: 0.1rem solid rgba(196, 196, 204, 0.2);
+    width: 100%;
     padding-top: 1rem;
     display: flex;
-    gap: 1rem;
 }
 
 .scroll-container li {
+    border-top: 0.1rem solid rgba(196, 196, 204, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    padding: 0 0 2rem;
+    padding: 2rem 1rem 2rem;
 }
 
 .temperature-bar {
@@ -52,5 +52,3 @@
 .scroll-container li > .extra-data > img {
     width: 4rem;
 }
-
-
