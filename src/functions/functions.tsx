@@ -29,18 +29,15 @@ export function astroPosition(sunStart: string, sunEnd: string, moonStart: strin
 
     const sunStartDecimalHour = Number(hour24Format(sunStart).split(":")[0]) + (Number(hour24Format(sunStart).split(":")[1]) / 60)
     const sunEndDecimalHour = Number(hour24Format(sunEnd).split(":")[0]) + (Number(hour24Format(sunEnd).split(":")[1]) / 60)
-
-    const moonStartDecimalHour = Number(hour24Format(moonStart).split(":")[0]) + (Number(hour24Format(moonStart).split(":")[1]) / 60)
-    const moonEndDecimalHour = Number(hour24Format(moonEnd).split(":")[0]) + (Number(hour24Format(moonEnd).split(":")[1])) / 60
-
-    const currentDecimalHour = Number(current.split(" ")[1].split(":")[0]) + (Number(current.split(" ")[1].split(":")[1]) / 60)
-
     const sunStartDegree = (sunStartDecimalHour > 24 ? sunStartDecimalHour - 12 : sunStartDecimalHour) * 360 / 24;
     const sunEndDegree = (sunEndDecimalHour > 24 ? sunEndDecimalHour - 12 : sunEndDecimalHour) * 360 / 24;
 
+    const moonStartDecimalHour = Number(hour24Format(moonStart).split(":")[0]) + (Number(hour24Format(moonStart).split(":")[1]) / 60)
+    const moonEndDecimalHour = Number(hour24Format(moonEnd).split(":")[0]) + (Number(hour24Format(moonEnd).split(":")[1])) / 60
     const moonStartDegree = moonStartDecimalHour * 360 / 24;
     const moonEndDegree = moonEndDecimalHour * 360 / 24;
 
+    const currentDecimalHour = Number(current.split(" ")[1].split(":")[0]) + (Number(current.split(" ")[1].split(":")[1]) / 60)
     const currentHourDegree = currentDecimalHour * 360 / 24;
 
     return ({

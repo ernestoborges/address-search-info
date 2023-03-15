@@ -54,7 +54,6 @@ export function DayForecast() {
             handleLeftConstraint();
         };
         window.addEventListener("resize", handleResize);
-        handleLeftConstraint();
         return () => {
             window.removeEventListener("resize", handleResize);
         };
@@ -77,6 +76,7 @@ export function DayForecast() {
                         right: 0,
                         left: -leftConstraint
                     }}
+                    onLoad={handleLeftConstraint}
                 >
                     {
                         fullDayData && fullDayData.map((hour, index) => (
