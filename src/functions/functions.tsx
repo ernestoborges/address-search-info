@@ -13,7 +13,7 @@ export function hour24Format(date: string) {
     if (date.split(" ")[1] === "PM") {
         return (`${(Number(date.split(":")[0]) === 12 ? 12 : Number(date.split(":")[0]) + 12).toString()}:${date.split(" ")[0].split(":")[1]}`)
     }
-    return (Number(date.split(":")[0]) >= 12 ? (Number(date.split(":")[0]) - 12).toString() + ":" + date.split(" ")[0].split(":")[1] : date.split(" ")[0])
+    return (Number(date.split(":")[0]) === 12 ?  "00:" + date.split(" ")[0].split(":")[1] : date.split(" ")[0])
 }
 
 export function conicString(start: number, end: number, background: string, color: string) {

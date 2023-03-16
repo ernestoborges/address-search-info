@@ -144,6 +144,10 @@
 .clock-sunmoon-icons > *:nth-child(1){
    color: #2B2D18;
 }
+.clock-sunmoon-icons > *:nth-child(2){
+   font-size: 0.8rem;
+}
+
 
 
 /* digital clock */
@@ -251,13 +255,17 @@
 }
 .grid-sunset {
    grid-area: sunset;
+   width: 5.7rem
 }
 .grid-sunrise {
+   width: 5.7rem;
    grid-area: sunrise;
 }
 .grid-moonset {
+   width: 5.7rem;
    grid-area: moonset;
 }
 .grid-moonrise {
+   width: 5.7rem;
    grid-area: moonrise;
 }

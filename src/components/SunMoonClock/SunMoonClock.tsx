@@ -91,9 +91,9 @@ export function SunMoonClock() {
                         <IoIosMoon style={clockDotsPosition(
                             100,
                             100,
-                            (astroPosDegree.moon.startDegree + astroPosDegree.moon.endDegree) / 2 + 180,
+                            (astroPosDegree.moon.startDegree + astroPosDegree.moon.endDegree) / 2,
                             360,
-                            30.5)} />
+                            31)} />
                     </div>
                     <div className="clock-pointer">
                         <span style={clockDotsPosition(100, 100, astroPosDegree.sun.currentHourDegree + 180, 360, 45)}></span>
