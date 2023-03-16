@@ -2,6 +2,7 @@ import WeatherDataContext from "../../contexts/WeatherDataProvider"
 import { useContext, useState } from "react"
 import "./styles.css"
 import { useTranslation } from "react-i18next"
+import MetricsContext from "../../contexts/MetricsProvider";
 
 
 export function MiscInfo() {
@@ -9,8 +10,22 @@ export function MiscInfo() {
     const { t } = useTranslation();
 
     const weatherData = useContext(WeatherDataContext)?.weatherData;
+    const metrics = useContext(MetricsContext)?.metrics;
 
     const [isDetailsOn, setIsDetailsOn] = useState(false);
+
+    function handleFeelsLikeValue(
+        data:{
+            feelslike_c: number;
+            feelslike_f: number;
+        }
+    ){
+        switch(metrics?.temperature){
+            case "c": return data.feelslike_c;
+            case "f": return data.feelslike_f;
+            default: return 0
+        }
+    }
 
     return (
         <>
@@ -37,7 +52,7 @@ export function MiscInfo() {
                                 <hr></hr>
                                 <li>
                                     <span>{t("misc_info.feels_like")}</span>
-                                    <span>{weatherData.current.feelslike_c} ºC</span>
+                                    <span>{`${handleFeelsLikeValue(weatherData.current)} º${metrics?.temperature.toUpperCase()}`} </span>
                                 </li>
                                 <hr></hr>
                                 <li>

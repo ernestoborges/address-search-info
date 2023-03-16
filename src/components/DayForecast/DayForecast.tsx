@@ -3,14 +3,17 @@ import { useCallback, useContext, useEffect, useLayoutEffect, useMemo, useState 
 import "./styles.css"
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion"
+import MetricsContext from "../../contexts/MetricsProvider";
 
 
 export function DayForecast() {
 
+    const weatherData = useContext(WeatherDataContext)?.weatherData;
+    const metrics = useContext(MetricsContext)?.metrics;
+
     const [containerKey, setContainerKey] = useState(0);
     const [leftConstraint, setLeftConstraint] = useState(0);
 
-    const weatherData = useContext(WeatherDataContext)?.weatherData;
     const [fullDayData, setFullDayData] = useState(weatherData?.forecast.forecastday[0].hour);
     const [temperatureRange, setTemperatureRange] = useState({ max: 0, min: 0 });
 
@@ -30,9 +33,35 @@ export function DayForecast() {
         }
     }, ["carousel-id"])
 
-    const handleTemperatureBarSize = (tempNow: number) => {
-        const {max, min} = temperatureRange
+    function handleTemperatureBarSize(tempNow: number) {
+        const { max, min } = temperatureRange
         return ((tempNow - min) * 100) / (max - min) + 10
+    }
+
+    function handleTemperatureValue(
+        data: {
+            temp_c: number;
+            temp_f: number;
+        }
+    ) {
+        switch (metrics?.temperature) {
+            case "c": return data.temp_c;
+            case "f": return data.temp_f;
+            default: return 0;
+        }
+    }
+
+    function handleWindSpeedValue(
+        data: {
+            wind_kph: number;
+            wind_mph: number;
+        }
+    ){
+        switch(metrics?.distance){
+            case "km": return data.wind_kph;
+            case "mi": return data.wind_mph;
+            default: return 0;
+        }
     }
 
     useEffect(() => {
@@ -40,13 +69,13 @@ export function DayForecast() {
     }, [weatherData])
 
     useMemo(() => {
-        const max = fullDayData ? Math.max(...fullDayData.map((day) => day.temp_c)) : 0
-        const min = fullDayData ? Math.min(...fullDayData.map((day) => day.temp_c)) : 0
+        const max = fullDayData ? Math.max(...fullDayData.map((day) => handleTemperatureValue(day))) : 0
+        const min = fullDayData ? Math.min(...fullDayData.map((day) => handleTemperatureValue(day))) : 0
         setTemperatureRange({
             max: max,
             min: min
         })
-    }, [fullDayData])
+    }, [fullDayData, metrics])
 
     useEffect(() => {
         const handleResize = () => {
@@ -82,17 +111,17 @@ export function DayForecast() {
                         fullDayData && fullDayData.map((hour, index) => (
                             <li key={index}>
                                 <span className="temperature-data">
-                                    {Math.round(hour.temp_c)}º
+                                    {Math.round(handleTemperatureValue(hour))}º
                                 </span>
                                 <div
                                     className="temperature-bar"
-                                    style={{ height: handleTemperatureBarSize(hour.temp_c) + "px" }}
+                                    style={{ height: handleTemperatureBarSize(handleTemperatureValue(hour)) + "px" }}
                                 >
                                 </div>
                                 <span className="extra-data">
                                     <img src={hour.condition.icon} />
                                     <span>
-                                        {hour.wind_kph.toFixed(1) + "km/h"}
+                                        {`${handleWindSpeedValue(hour).toFixed(1)} ${metrics?.distance === "mi" ? "m" : metrics?.distance}ph`}
                                     </span>
                                     <span>
                                         {hour.time.split(" ")[1]}

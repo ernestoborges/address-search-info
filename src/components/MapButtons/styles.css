@@ -37,9 +37,45 @@
 .selected-button {
     transform: rotate(90deg);
 }
-.selected-lang {
+.selected-option {
     border: 0.1rem solid var(--background);
     background-color: var(--main-text-color);
     color: var(--element-background);
     font-weight: bold;
+}
+
+/* metrics */
+
+.metrics-button {
+    left: 1rem;
+    bottom: 6rem;
+    transform: rotate(45deg);
+    transition: transform 0.5s;
+}
+
+.metrics-button > * {
+    font-size: 1.6rem;
+    opacity: 0.9;
+}
+
+.metrics-kmph{
+    transition: left 0.5s, bottom 0.5s, color 0.5s, background-color 0.5s;
+}
+
+.metrics-mph{
+    transition: left 0.5s, bottom 0.5s, color 0.5s, background-color 0.5s;
+    left: 9rem;
+    bottom: 4rem;
+}
+
+.metrics-celcius{
+    transition: left 0.5s, bottom 0.5s, color 0.5s, background-color 0.5s;
+    left: 5rem;
+    bottom: 8rem;
+}
+
+.metrics-fahrenheit{
+    transition: left 0.5s, bottom 0.5s, color 0.5s, background-color 0.5s;
+    left: 9rem;
+    bottom: 8rem;
 }

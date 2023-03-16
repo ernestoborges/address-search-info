@@ -3,6 +3,7 @@ import { clockDotsPosition } from "../../functions/functions"
 import { useContext } from "react"
 import "./styles.css"
 import { useTranslation } from "react-i18next"
+import MetricsContext from "../../contexts/MetricsProvider"
 
 export function WindInfo() {
 
@@ -26,8 +27,17 @@ export function WindInfo() {
     ]
 
     const weatherData = useContext(WeatherDataContext)?.weatherData;
+    const metrics = useContext(MetricsContext)?.metrics;
 
     const { t } = useTranslation();
+
+    function handleWindSpeedValue(){
+        switch(metrics?.distance){
+            case "km": return weatherData?.current.wind_kph;
+            case "mi": return weatherData?.current.wind_mph;
+            default: return 0;
+        }
+    }
 
     return (
 
@@ -40,7 +50,7 @@ export function WindInfo() {
                         <ul>
                             <li>
                                 <span>{t("wind_info.speed")}</span>
-                                <span>{weatherData.current.wind_kph} km/h</span>
+                                <span>{`${handleWindSpeedValue()} ${metrics?.distance === "mi" ? "m" : metrics?.distance }ph`} </span>
                             </li>
                             <hr></hr>
                             <li>

@@ -207,7 +207,7 @@ const resources = {
                 title: "Vento",
                 speed: "Velocidade",
                 direction: "Direção",
-                degree: "Grau",
+                degree: "Graus",
                 direction_subtitle: {
                     n: "N",
                     nne: "NNE",

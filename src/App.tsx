@@ -6,6 +6,7 @@ import { DayForecast } from './components/DayForecast/DayForecast';
 import { Map } from './components/Map/Map';
 import { CenterMapButton } from './components/MapButtons/CenterMapButton';
 import { LangButton } from './components/MapButtons/LangButton';
+import { MetricButtons } from './components/MapButtons/MetricsButton';
 import { MyLocationButton } from './components/MapButtons/MyLocationButton';
 import { MiscInfo } from './components/MiscInfo/MiscInfo';
 import { SummarizedInfo } from './components/SummarizedInfo/SummarizedInfo';
@@ -59,6 +60,7 @@ function App() {
             <MyLocationButton />
             <CenterMapButton />
             <LangButton />
+            <MetricButtons />
             <Map />
           </section>
           <section className="main-section summarized-info-section">
