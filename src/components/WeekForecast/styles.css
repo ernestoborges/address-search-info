@@ -10,7 +10,6 @@
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    text-transform: capitalize;
 }
 .week-forecast-section > div:first-child > h2 {
     font-weight: normal;

@@ -96,7 +96,7 @@ const resources = {
                 }
             },
             week_forecast: {
-                title: "3 Day Forecast",
+                title: "3 day forecast",
                 high: "High",
                 low: "Low",
                 weekday: {
@@ -111,6 +111,26 @@ const resources = {
             },
             day_forecast: {
                 title: "24 hours forecast"
+            },
+            misc_info: {
+                humidity: "Humidity",
+                cloud: "Cloud",
+                chance_of_rain: "Chance of rain",
+                feels_like: "Feels like",
+                pressure: "Pressure",
+                uv: "UV",
+                epa_air_quality: "EPA Air Quality",
+                show: "show",
+                hide: "hide",
+                details: "details",
+                epa_index: {
+                    1: "Good",
+                    2: "Moderate",
+                    3: "Unhealthy for Sensitive Groups",
+                    4: "Unhealthy",
+                    5: "Very Unhealthy",
+                    6: "Hazardous",
+                }
             }
         }
     },
@@ -223,6 +243,26 @@ const resources = {
             },
             day_forecast: {
                 title: "Previsão para 24 horas"
+            },
+            misc_info: {
+                humidity: "Umidade",
+                cloud: "Nuvens",
+                chance_of_rain: "Chance de chuva",
+                feels_like: "Sensação",
+                pressure: "Pressão",
+                uv: "UV",
+                epa_air_quality: "EPA Qualidade do Ar",
+                show: "mostrar",
+                hide: "esconder",
+                details: "detalhes",
+                epa_index: {
+                    1: "Bom",
+                    2: "Moderado",
+                    3: "Não saudável para grupos sensíveis",
+                    4: "Não saudáve",
+                    5: "Muito não saudável",
+                    6: "Perigoso"
+                }
             }
         }
     }

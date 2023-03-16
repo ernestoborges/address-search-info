@@ -1,25 +1,16 @@
 import WeatherDataContext from "../../contexts/WeatherDataProvider"
 import { useContext, useState } from "react"
 import "./styles.css"
+import { useTranslation } from "react-i18next"
+
 
 export function MiscInfo() {
+
+    const { t } = useTranslation();
 
     const weatherData = useContext(WeatherDataContext)?.weatherData;
 
     const [isDetailsOn, setIsDetailsOn] = useState(false);
-
-    function indexToText(index: number) {
-        switch (index) {
-            case 1: return ("Good")
-            case 2: return ("Moderate")
-            case 3: return ("Unhealthy for Sensitive Groups")
-            case 4: return ("Unhealthy")
-            case 5: return ("Very Unhealthy")
-            case 6: return ("Hazardous")
-            default:
-                break;
-        }
-    }
 
     return (
         <>
@@ -30,40 +21,40 @@ export function MiscInfo() {
                         <div className={`misc-lists-container ${!isDetailsOn ? "" : "hide-misc-info"}`}>
                             <ul>
                                 <li>
-                                    <span>Humidity</span>
+                                    <span>{t("misc_info.humidity")}</span>
                                     <span>{weatherData.current.humidity}%</span>
                                 </li>
                                 <hr></hr>
                                 <li>
-                                    <span>Cloud</span>
+                                    <span>{t("misc_info.cloud")}</span>
                                     <span>{weatherData.current.cloud}%</span>
                                 </li>
                                 <hr></hr>
                                 <li>
-                                    <span>Chance of rain</span>
+                                    <span>{t("misc_info.chance_of_rain")}</span>
                                     <span>{weatherData.forecast.forecastday[0].day.daily_chance_of_rain}%</span>
                                 </li>
                                 <hr></hr>
                                 <li>
-                                    <span>Feels like</span>
+                                    <span>{t("misc_info.feels_like")}</span>
                                     <span>{weatherData.current.feelslike_c} ºC</span>
                                 </li>
                                 <hr></hr>
                                 <li>
-                                    <span>Pressure</span>
+                                    <span>{t("misc_info.pressure")}</span>
                                     <span>{weatherData.current.pressure_mb} mbar</span>
                                 </li>
                                 <hr></hr>
                                 <li>
-                                    <span>UV</span>
+                                    <span>{t("misc_info.uv")}</span>
                                     <span>{weatherData.current.uv}</span>
                                 </li>
                                 <hr></hr>
                                 <li className="air-quality-item">
-                                    <span>EPA Air Quality</span>
+                                    <span>{t("misc_info.epa_air_quality")}</span>
                                     <span
                                         className={`air-quality-${weatherData.current.air_quality["us-epa-index"]}`}
-                                    >{indexToText(weatherData.current.air_quality["us-epa-index"])}</span>
+                                    >{t(`misc_info.epa_index.${weatherData.current.air_quality["us-epa-index"]}`)}</span>
                                 </li>
                             </ul>
                             <ul>
@@ -104,7 +95,7 @@ export function MiscInfo() {
                             </ul>
                         </div>
                     </div>
-                    <button onClick={() => setIsDetailsOn(!isDetailsOn)}>{`${isDetailsOn ? "hide" : "show"} details`}</button>
+                    <button onClick={() => setIsDetailsOn(!isDetailsOn)}>{`${isDetailsOn ? t("misc_info.hide") : t("misc_info.show")} ${t("misc_info.details")}`}</button>
                 </>
             }
         </>
