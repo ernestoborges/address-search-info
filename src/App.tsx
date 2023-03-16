@@ -7,6 +7,7 @@ import { Map } from './components/Map/Map';
 import { CenterMapButton } from './components/MapButtons/CenterMapButton';
 import { LangButton } from './components/MapButtons/LangButton';
 import { MyLocationButton } from './components/MapButtons/MyLocationButton';
+import { MiscInfo } from './components/MiscInfo/MiscInfo';
 import { SummarizedInfo } from './components/SummarizedInfo/SummarizedInfo';
 import { SunMoonInfo } from './components/SunMoonClock/SunMoonInfo';
 import { WeekForecast } from './components/WeekForecast/WeekForecast';
@@ -27,7 +28,7 @@ function App() {
   const place = useContext(PlaceContext)?.place;
   const setWeatherData = useContext(WeatherDataContext)?.setWeatherData;
 
-  const weatherHTTP = `https://api.weatherapi.com/v1/forecast.json?key=${import.meta.env.VITE_REACT_APP_WEATHERAPI_API_KEY}&q=${place?.lat},${place?.lng}&days=3&aqi=no&alerts=no`
+  const weatherHTTP = `https://api.weatherapi.com/v1/forecast.json?key=${import.meta.env.VITE_REACT_APP_WEATHERAPI_API_KEY}&q=${place?.lat},${place?.lng}&days=3&aqi=yes&alerts=no`
 
   async function fetchWeatherData() {
     try {
@@ -68,6 +69,9 @@ function App() {
           </section>
           <section className='main-section wind-info-section'>
             <WindInfo />
+          </section>
+          <section  className="main-section misc-info-section">
+            <MiscInfo />
           </section>
           <section className='main-section week-forecast-section'>
             <WeekForecast />

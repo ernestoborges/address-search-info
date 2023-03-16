@@ -50,6 +50,10 @@
 .wind-info-section {
   grid-area: span 2 / span 1 ;
 }
+.misc-info-section {
+  grid-area: span 2 / span 1 ;
+}
+
 
 @media only screen and (max-width: 470px){
   .week-forecast-section {
