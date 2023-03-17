@@ -51,7 +51,7 @@
 .autocomplete-list > li {
     width: 100%;
     display: flex;
-    justfy-content: flex-start;
+    justify-content: flex-start;
     align-items: center;
     gap: 0.4rem;
 }
@@ -63,7 +63,7 @@
     width: 100%;
     width: 100%;
     display: flex;
-    justfy-content: flex-start;
+    justify-content: flex-start;
     overflow: hidden;
 }
 

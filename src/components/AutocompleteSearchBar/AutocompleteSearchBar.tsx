@@ -9,7 +9,7 @@ export function AutocompleteSearchBar() {
 
   const listRef = useRef<HTMLUListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const blurTimeout = useRef<number | null>(null);
+  const blurTimeout = useRef<any | null>(null);
 
   const setPlace = useContext(PlaceContext)?.setPlace;
 
@@ -18,7 +18,6 @@ export function AutocompleteSearchBar() {
     value,
     setValue,
     suggestions: { status, data },
-    clearSuggestions
   } = usePlacesAutocomplete();
 
   async function handleSelectPlace(address: string) {
