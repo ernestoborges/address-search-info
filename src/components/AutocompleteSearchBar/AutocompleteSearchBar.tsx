@@ -9,7 +9,7 @@ export function AutocompleteSearchBar() {
 
   const listRef = useRef<HTMLUListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const blurTimeout = useRef<any | null>(null);
+  const blurTimeout = useRef<number | null>(null);
 
   const setPlace = useContext(PlaceContext)?.setPlace;
 
@@ -37,7 +37,7 @@ export function AutocompleteSearchBar() {
   }
 
   function handleInputBlur() {
-    blurTimeout.current = setTimeout(() => {
+    blurTimeout.current = window.setTimeout(() => {
       listRef.current && (listRef.current.style.display = "none");
     }, 200);
   }
