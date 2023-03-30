@@ -238,6 +238,10 @@
    font-size: 1.8rem;
 }
 
+.rise-n-set-table-container .table > div > span {
+   width: 2.85rem;
+}
+
 .grid-sun {
    grid-area: sun;
    align-self: center;

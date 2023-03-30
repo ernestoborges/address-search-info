@@ -15,7 +15,6 @@ import { WeekForecast } from './components/WeekForecast/WeekForecast';
 import { WindInfo } from './components/WindInfo/WindInfo';
 import PlaceContext from './contexts/PlaceProvider';
 import WeatherDataContext from './contexts/WeatherDataProvider';
-import i18n from './translation/i18n';
 
 const libraries: ["places" | "drawing" | "geometry" | "localContext" | "visualization"] = ['places'];
 
@@ -28,8 +27,6 @@ function App() {
 
   const place = useContext(PlaceContext)?.place;
   const setWeatherData = useContext(WeatherDataContext)?.setWeatherData;
-
-  // const weatherHTTP = `https://api.weatherapi.com/v1/forecast.json?key=${import.meta.env.VITE_REACT_APP_WEATHERAPI_API_KEY}&q=${place?.lat},${place?.lng}&days=3&aqi=yes&alerts=no`
 
   const weatherHTTP = `/.netlify/functions/fetch-weather?lat=${place?.lat}&lng=${place?.lng}`
 

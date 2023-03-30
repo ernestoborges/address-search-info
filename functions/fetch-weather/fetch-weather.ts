@@ -23,7 +23,5 @@ export const handler: Handler = async (event, context) => {
       statusCode: status,
       body: JSON.stringify({status, statusText, headers, data})
     }
-
   }
-
 }
