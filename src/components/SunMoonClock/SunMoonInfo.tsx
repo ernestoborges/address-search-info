@@ -42,9 +42,9 @@ export function SunMoonInfo() {
                             <div className="grid-astrorise">
                                 <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 10" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M7.646 1.146a.5.5 0 0 1 .708 0l1.5 1.5a.5.5 0 0 1-.708.708L8.5 2.707V4.5a.5.5 0 0 1-1 0V2.707l-.646.647a.5.5 0 1 1-.708-.708l1.5-1.5z M11.709 11.5a4 4 0 1 0-7.418 0H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1h-3.79z"></path></svg>
                             </div>
-                            <div>
+                            <span>
                                 {astroData && hour24Format(astroData.sunrise).split(" ")[0]}
-                            </div>
+                            </span>
                         </div>
                         <div className="grid-sunset">
                             <div className="grid-astroset">
